@@ -4,9 +4,8 @@ import * as fs from "fs";
 
 const input = fs.readFileSync("src/2015/3/input.txt", "utf-8");
 
-const position = [0, 0];
-
-function countVisited(input: string): number {
+function visited(input: string): Set<string> {
+    const position = [0, 0];
     const visited = new Set<string>();
 
     for (const char of input) {
@@ -27,7 +26,31 @@ function countVisited(input: string): number {
 
         visited.add(position.toString());
     }
-    return visited.size;
+    return visited;
 }
 
-console.log(countVisited(input));
+function visitedWithRobo(input: string): Set<string> {
+    const santaInstructions = [];
+    const roboInstructions = [];
+
+    for (let i = 0; i < input.length; i += 1) {
+        if (i % 2 == 0) {
+            santaInstructions.push(input[i]);
+        } else {
+            roboInstructions.push(input[i]);
+        }
+    }
+
+    const santaVisits = visited(santaInstructions.join(""));
+    const roboVisits = visited(roboInstructions.join(""));
+
+    const combinedVisits = new Set([
+        ...Array.from(santaVisits),
+        ...Array.from(roboVisits),
+    ]);
+
+    return combinedVisits;
+}
+
+console.log(`Visited - Santa: ${visited(input).size}`);
+console.log(`Visited - Santa w/ Robo-Santa: ${visitedWithRobo(input).size}`);
