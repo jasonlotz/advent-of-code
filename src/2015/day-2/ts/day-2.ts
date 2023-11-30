@@ -12,7 +12,7 @@ function calculateTotals(input: string) {
         const w = parseInt(dimentions[1]);
         const h = parseInt(dimentions[2]);
 
-        totalWrappingArea += calculateRectangleArea(l, w, h);
+        totalWrappingArea += calculateSurfaceArea(l, w, h);
         totalWrappingArea += calculateSmallestSideArea(l, w, h);
 
         totalRibbonLength += calculateRibbonWrapLength(l, w, h);
@@ -22,7 +22,7 @@ function calculateTotals(input: string) {
     return { totalWrappingArea, totalRibbonLength };
 }
 
-function calculateRectangleArea(l: number, w: number, h: number) {
+function calculateSurfaceArea(l: number, w: number, h: number) {
     return 2 * l * w + 2 * w * h + 2 * h * l;
 }
 
