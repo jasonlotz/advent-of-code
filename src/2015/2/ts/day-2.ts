@@ -2,41 +2,49 @@
 
 import * as fs from "fs";
 
+type dimension = { l: number; w: number; h: number };
+
 function calculateTotals(input: string) {
     let totalWrappingArea = 0;
     let totalRibbonLength = 0;
 
     input.split("\n").forEach((line) => {
-        const dimentions = line.split("x");
-        const l = parseInt(dimentions[0]);
-        const w = parseInt(dimentions[1]);
-        const h = parseInt(dimentions[2]);
+        const dimensions = line.split("x");
+        const dimension: dimension = {
+            l: parseInt(dimensions[0]),
+            w: parseInt(dimensions[1]),
+            h: parseInt(dimensions[2]),
+        };
 
-        totalWrappingArea += calculateSurfaceArea(l, w, h);
-        totalWrappingArea += calculateSmallestSideArea(l, w, h);
+        totalWrappingArea += calculateSurfaceArea(dimension);
+        totalWrappingArea += calculateSmallestSideArea(dimension);
 
-        totalRibbonLength += calculateRibbonWrapLength(l, w, h);
-        totalRibbonLength += calculateRibbonBowLength(l, w, h);
+        totalRibbonLength += calculateRibbonWrapLength(dimension);
+        totalRibbonLength += calculateRibbonBowLength(dimension);
     });
 
     return { totalWrappingArea, totalRibbonLength };
 }
 
-function calculateSurfaceArea(l: number, w: number, h: number) {
+function calculateSurfaceArea(dimension: dimension): number {
+    const { l, w, h } = dimension;
     return 2 * l * w + 2 * w * h + 2 * h * l;
 }
 
-function calculateSmallestSideArea(l: number, w: number, h: number) {
+function calculateSmallestSideArea(dimension: dimension): number {
+    const { l, w, h } = dimension;
     const areas = [l * w, w * h, h * l];
     return Math.min(...areas);
 }
 
-function calculateRibbonWrapLength(l: number, w: number, h: number) {
+function calculateRibbonWrapLength(dimension: dimension): number {
+    const { l, w, h } = dimension;
     const lengths = [2 * l + 2 * w, 2 * w + 2 * h, 2 * h + 2 * l];
     return Math.min(...lengths);
 }
 
-function calculateRibbonBowLength(l: number, w: number, h: number) {
+function calculateRibbonBowLength(dimension: dimension): number {
+    const { l, w, h } = dimension;
     const length = l * w * h;
     return length;
 }
