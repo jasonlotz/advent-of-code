@@ -1,4 +1,4 @@
-// Run: ts-node src/2015/day-2/ts/day-2.ts
+// Run: ts-node src/2015/2/ts/day-2.ts
 
 import * as fs from "fs";
 
@@ -41,7 +41,7 @@ function calculateRibbonBowLength(l: number, w: number, h: number) {
     return length;
 }
 
-const input = fs.readFileSync("src/2015/day-2/input.txt", "utf-8");
+const input = fs.readFileSync("src/2015/2/input.txt", "utf-8");
 const totals = calculateTotals(input);
 
 console.log(`Total wrapping area: ${totals.totalWrappingArea}`);
