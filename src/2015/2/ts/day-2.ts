@@ -2,7 +2,11 @@
 
 import * as fs from "fs";
 
-type dimension = { l: number; w: number; h: number };
+interface Dimension {
+    l: number;
+    w: number;
+    h: number;
+}
 
 function calculateTotals(input: string) {
     let totalWrappingArea = 0;
@@ -10,7 +14,7 @@ function calculateTotals(input: string) {
 
     input.split("\n").forEach((line) => {
         const dimensions = line.split("x");
-        const dimension: dimension = {
+        const dimension: Dimension = {
             l: parseInt(dimensions[0]),
             w: parseInt(dimensions[1]),
             h: parseInt(dimensions[2]),
@@ -26,24 +30,24 @@ function calculateTotals(input: string) {
     return { totalWrappingArea, totalRibbonLength };
 }
 
-function calculateSurfaceArea(dimension: dimension): number {
+function calculateSurfaceArea(dimension: Dimension): number {
     const { l, w, h } = dimension;
     return 2 * l * w + 2 * w * h + 2 * h * l;
 }
 
-function calculateSmallestSideArea(dimension: dimension): number {
+function calculateSmallestSideArea(dimension: Dimension): number {
     const { l, w, h } = dimension;
     const areas = [l * w, w * h, h * l];
     return Math.min(...areas);
 }
 
-function calculateRibbonWrapLength(dimension: dimension): number {
+function calculateRibbonWrapLength(dimension: Dimension): number {
     const { l, w, h } = dimension;
     const lengths = [2 * l + 2 * w, 2 * w + 2 * h, 2 * h + 2 * l];
     return Math.min(...lengths);
 }
 
-function calculateRibbonBowLength(dimension: dimension): number {
+function calculateRibbonBowLength(dimension: Dimension): number {
     const { l, w, h } = dimension;
     const length = l * w * h;
     return length;
