@@ -68,12 +68,12 @@ def throw_round(theirs, ours):
     return points
 
 
-input_string = "src/2022/02/input.txt"
+input_path = "src/2022/02/input.txt"
 
 total_points = 0
 throw_total_points = 0
 
-with open(input_string, "r") as input_file:
+with open(input_path, "r") as input_file:
     for line in input_file:
         theirs, ours = line.replace("\n", "").split(" ")
         total_points += round(theirs, ours)
