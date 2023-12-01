@@ -1,6 +1,6 @@
-# A, X = Rock, 1 point
-# B, Y = Paper, 2 points
-# C, Z = Scissors, 3 points
+WIN_POINTS = 6
+LOSE_POINTS = 0
+TIE_POINTS = 3
 
 shape_points_map = {
     'X': 1,
@@ -8,11 +8,7 @@ shape_points_map = {
     'Z': 3
 }
 
-WIN_POINTS = 6
-LOSE_POINTS = 0
-TIE_POINTS = 3
-
-outcome_points = {
+outcome_points_map = {
     ('X', 'A'): TIE_POINTS,
     ('Y', 'B'): TIE_POINTS,
     ('Z', 'C'): TIE_POINTS,
@@ -30,7 +26,7 @@ outcome_points = {
 
 def round(theirs, ours):
     points = shape_points_map[ours]
-    points += outcome_points[ours, theirs]
+    points += outcome_points_map[ours, theirs]
 
     return points
 
