@@ -1,11 +1,11 @@
-input_string = 'src/2022/01/input.txt'
+input_string = "src/2022/01/input.txt"
 
-with open(input_string, 'r') as input_file:
+with open(input_string, "r") as input_file:
     current_calories = 0
     calories = []
 
     for line in input_file:
-        if line == '\n':
+        if line == "\n":
             calories.append(current_calories)
             current_calories = 0
             continue

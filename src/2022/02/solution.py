@@ -3,42 +3,42 @@ LOSE_POINTS = 0
 TIE_POINTS = 3
 
 shape_points_map = {
-    'X': 1,
-    'Y': 2,
-    'Z': 3
+    "X": 1,
+    "Y": 2,
+    "Z": 3
 }
 
 outcome_points_map = {
-    ('X', 'A'): TIE_POINTS,
-    ('Y', 'B'): TIE_POINTS,
-    ('Z', 'C'): TIE_POINTS,
+    ("X", "A"): TIE_POINTS,
+    ("Y", "B"): TIE_POINTS,
+    ("Z", "C"): TIE_POINTS,
 
-    ('X', 'C'): WIN_POINTS,
-    ('X', 'B'): LOSE_POINTS,
+    ("X", "C"): WIN_POINTS,
+    ("X", "B"): LOSE_POINTS,
 
-    ('Y', 'A'): WIN_POINTS,
-    ('Y', 'C'): LOSE_POINTS,
+    ("Y", "A"): WIN_POINTS,
+    ("Y", "C"): LOSE_POINTS,
 
-    ('Z', 'B'): WIN_POINTS,
-    ('Z', 'A'): LOSE_POINTS,
+    ("Z", "B"): WIN_POINTS,
+    ("Z", "A"): LOSE_POINTS,
 }
 
 throw_win_map = {
-    'C': 'X',
-    'A': 'Y',
-    'B': 'Z'
+    "C": "X",
+    "A": "Y",
+    "B": "Z"
 }
 
 throw_tie_map = {
-    'A': 'X',
-    'B': 'Y',
-    'C': 'Z',
+    "A": "X",
+    "B": "Y",
+    "C": "Z",
 }
 
 throw_lose_map = {
-    'B': 'X',
-    'C': 'Y',
-    'A': 'Z'
+    "B": "X",
+    "C": "Y",
+    "A": "Z"
 }
 
 
@@ -68,12 +68,12 @@ def throw_round(theirs, ours):
     return points
 
 
-input_string = 'src/2022/02/input.txt'
+input_string = "src/2022/02/input.txt"
 
 total_points = 0
 throw_total_points = 0
 
-with open(input_string, 'r') as input_file:
+with open(input_string, "r") as input_file:
     for line in input_file:
         theirs, ours = line.replace("\n", "").split(" ")
         total_points += round(theirs, ours)
