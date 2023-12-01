@@ -1,5 +1,3 @@
-// Run: ts-node src/2015/2/ts/day-2.ts
-
 import * as fs from "fs";
 
 interface Dimension {

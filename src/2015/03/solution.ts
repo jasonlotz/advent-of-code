@@ -1,8 +1,6 @@
-// Run: ts-node src/2015/3/ts/day-3.ts
-
 import * as fs from "fs";
 
-const input = fs.readFileSync("src/2015/3/input.txt", "utf-8");
+const input = fs.readFileSync("src/2015/03/input.txt", "utf-8");
 
 function visited(input: string): Set<string> {
     const position = [0, 0];

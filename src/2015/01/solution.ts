@@ -1,8 +1,6 @@
-// Run: ts-node src/2015/1/ts/day-1.ts
-
 import * as fs from "fs";
 
-const input = fs.readFileSync("src/2015/1/input.txt", "utf-8");
+const input = fs.readFileSync("src/2015/01/input.txt", "utf-8");
 
 // Part 1
 const left = input.split("(").length - 1;
