@@ -13,9 +13,7 @@ class Game:
 
         rounds = splitLine[1].strip().split(";")  # [' 4 green,...', ...
 
-        for round in rounds:
-            round = round.strip().split(",")
-            self.rounds.append(round)
+        self.rounds = list(map(lambda round: round.strip().split(","), rounds))
 
     def validate(self, max_red, max_green, max_blue):
         for round in self.rounds:
