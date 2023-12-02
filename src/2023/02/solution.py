@@ -17,7 +17,7 @@ class Game:
             round = round.strip().split(",")
             self.rounds.append(round)
 
-    def validate(self, max_red=12, max_green=13, max_blue=14):
+    def validate(self, max_red, max_green, max_blue):
         for round in self.rounds:
             for color_count in round:
                 count, color = color_count.strip().split(" ")
@@ -56,7 +56,7 @@ with open(input_path, "r") as input_file:
     for line in input_file:
         game = Game()
         game.parse(line)
-        if game.validate():
+        if game.validate(12, 13, 14):
             total_valid += 1
             sum_valid_ids += game.id
         else:
