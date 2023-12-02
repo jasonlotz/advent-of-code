@@ -11,9 +11,8 @@ class Game:
 
         self.id = int(splitLine[0].split(" ")[1])  # 90
 
-        rounds = splitLine[1].strip().split(";")  # [' 4 green,...', ...
-
-        self.rounds = list(map(lambda round: round.strip().split(","), rounds))
+        self.rounds = list(map(lambda round: round.strip().split(
+            ","), splitLine[1].strip().split(";")))
 
     def validate(self, max_red, max_green, max_blue):
         for round in self.rounds:
