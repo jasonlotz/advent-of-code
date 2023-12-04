@@ -1,6 +1,6 @@
-input_path = "src/2022/01/input.txt"
+INPUT_PATH = "src/2022/01/input.txt"
 
-with open(input_path, "r") as input_file:
+with open(INPUT_PATH, "r") as input_file:
     current_calories = 0
     calories = []
 

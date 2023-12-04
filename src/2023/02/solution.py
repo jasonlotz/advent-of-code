@@ -1,4 +1,4 @@
-input_path = "src/2023/02/input.txt"
+INPUT_PATH = "src/2023/02/input.txt"
 
 
 class Game:
@@ -49,7 +49,7 @@ sum_valid_ids = 0
 total_cubes = 0
 
 
-with open(input_path, "r") as input_file:
+with open(INPUT_PATH, "r") as input_file:
     for line in input_file:
         game = Game()
         game.parse(line)

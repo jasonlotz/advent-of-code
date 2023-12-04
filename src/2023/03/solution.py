@@ -2,7 +2,7 @@ import re
 from pprint import pprint
 from collections import defaultdict, namedtuple
 
-input_path = "src/2023/03/input.txt"
+INPUT_PATH = "src/2023/03/input.txt"
 
 Point = namedtuple("Point", "x y")
 
@@ -57,7 +57,8 @@ def validate_part_number(part_number: PartNumber, symbols: set[Point]) -> bool:
     return False
 
 
-def find_touching_asterisks(part_number: PartNumber, asterisks: set[Point]) -> list[Point]:
+def find_touching_asterisks(part_number: PartNumber,
+                            asterisks: set[Point]) -> list[Point]:
     x = part_number.point.x
     y = part_number.point.y
     number_len = len(str(part_number.number))
@@ -91,12 +92,12 @@ def main():
     all_symbols = set()
     all_asterisks = set()
     valid_part_numbers = []
+    asterisk_dict = defaultdict(list)
+
     total = 0
     gearTotal = 0
 
-    asterisk_dict = defaultdict(list)
-
-    with open(input_path, "r") as input_file:
+    with open(INPUT_PATH, "r") as input_file:
         for i, line in enumerate(input_file):
             numbers, symbols, asterisks = parse_line(line.strip(), i)
             all_part_numbers.extend(numbers)

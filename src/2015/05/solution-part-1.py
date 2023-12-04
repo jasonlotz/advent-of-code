@@ -1,10 +1,10 @@
-input_path = "src/2015/05/input.txt"
+INPUT_PATH = "src/2015/05/input.txt"
 
 nice_strings = 0
 naughty_strings = 0
 
 
-with open(input_path, "r") as input_file:
+with open(INPUT_PATH, "r") as input_file:
     for line in input_file:
         vowel_count = 0
         double_letter = False

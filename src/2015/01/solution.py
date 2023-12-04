@@ -1,6 +1,6 @@
-input_path = "src/2015/01/input.txt"
+INPUT_PATH = "src/2015/01/input.txt"
 
-with open(input_path, "r") as input_file:
+with open(INPUT_PATH, "r") as input_file:
     for line in input_file:
         left = len(line.split("("))
         right = len(line.split(")"))

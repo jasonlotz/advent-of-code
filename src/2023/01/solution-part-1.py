@@ -1,6 +1,6 @@
-input_path = "src/2023/01/input.txt"
+INPUT_PATH = "src/2023/01/input.txt"
 
-with open(input_path, "r") as input_file:
+with open(INPUT_PATH, "r") as input_file:
     total = 0
 
     for line in input_file:

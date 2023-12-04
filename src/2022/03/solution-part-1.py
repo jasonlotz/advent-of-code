@@ -1,6 +1,8 @@
 from string import ascii_lowercase
 from string import ascii_uppercase
 
+INPUT_PATH = 'src/2022/03/input.txt'
+
 
 def find_matching_character_in_halves(str):
     mid_index = len(str) // 2
@@ -24,10 +26,9 @@ for index, letter in enumerate(ascii_uppercase, 1):
     char_score_map[letter] = index + 26
 
 
-input_path = 'src/2022/03/input.txt'
 total_score = 0
 
-with open(input_path, 'r') as input_file:
+with open(INPUT_PATH, 'r') as input_file:
     for line in input_file:
         match = find_matching_character_in_halves(line)
         if match:
