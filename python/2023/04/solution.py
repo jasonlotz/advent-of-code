@@ -1,5 +1,3 @@
-from pprint import pprint
-
 INPUT_PATH = "input-files/2023/04/input.txt"
 
 
