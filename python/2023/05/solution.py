@@ -1,117 +1,65 @@
-from collections import namedtuple
-import sys
-
 INPUT_PATH = "input-files/2023/05/input-sample.txt"
-
-Mapping = namedtuple(
-    "Mapping", ["destination_start", "source_start", "range_len"])
-
-seeds = []
-
-maps = {
-    "seed-to-soil": [],
-    "soil-to-fertilizer": [],
-    "fertilizer-to-water": [],
-    "water-to-light": [],
-    "light-to-temperature": [],
-    "temperature-to-humidity": [],
-    "humidity-to-location": [],
-}
-
-cached_ranges = {
-    "seed-to-soil": set(),
-    "soil-to-fertilizer": set(),
-    "fertilizer-to-water": set(),
-    "water-to-light": set(),
-    "light-to-temperature": set(),
-    "temperature-to-humidity": set(),
-    "humidity-to-location": set(), }
-
-
-def add_mapping(map_name: str, values: list):
-    destination_start = int(values[0])
-    source_start = int(values[1])
-    range_len = int(values[2])
-
-    mapping = Mapping(destination_start, source_start, range_len)
-
-    maps[map_name].append(mapping)
-
-
-def find_location(seed: int) -> int:
-    location = seed
-
-    location = lookup_mapping("seed-to-soil", location)
-    location = lookup_mapping("soil-to-fertilizer", location)
-    location = lookup_mapping("fertilizer-to-water", location)
-    location = lookup_mapping("water-to-light", location)
-    location = lookup_mapping("light-to-temperature", location)
-    location = lookup_mapping("temperature-to-humidity", location)
-    location = lookup_mapping("humidity-to-location", location)
-
-    return location
-
-
-def lookup_mapping(map_name: str, location: int) -> int:
-    for mapping in maps[map_name]:
-        if mapping.source_start <= location <= (mapping.source_start + mapping.range_len - 1):
-            location = location + \
-                (mapping.destination_start - mapping.source_start)
-            break
-    return location
 
 
 def part_1():
-    locations = []
+    seeds, *map_blocks = open(INPUT_PATH).read().split("\n\n")
 
-    with open(INPUT_PATH, "r") as input_file:
-        lines = input_file.readlines()
+    seeds = list(map(int, seeds.split(":")[1].split()))
 
-        seeds = lines[0].split(":")[1].strip().split()
+    for block in map_blocks:
+        map_ranges = []
+        for line in block.splitlines()[1:]:
+            map_ranges.append(list(map(int, line.split())))
 
-        load_maps(lines)
+        mapped_locations = []
+        for seed in seeds:
+            for destination_start, source_start, range_len in map_ranges:
+                if source_start <= seed < source_start + range_len:
+                    mapped_locations.append(
+                        seed - source_start + destination_start)
+                    break
+            else:
+                mapped_locations.append(seed)
 
-    for seed in seeds:
-        location = find_location(int(seed))
-        locations.append(location)
-        print(f"Seed {seed} is located at {location}")
+        seeds = mapped_locations
 
-    print(f"Minimum location for part 1: {min(locations)}")
-
-
-def load_maps(lines):
-    map_name = ""
-    for line in lines[2:]:
-        if line == "\n":
-            continue
-
-        if line[0].isdigit():
-            add_mapping(map_name, line.strip().split())
-            pass
-        else:
-            map_name = line.split()[0].strip()
-            print(f"Loading map name: {map_name}")
+    print(f"Minimum location - part 1: {min(seeds)}")
 
 
 def part_2():
-    min_location = sys.maxsize
+    inputs, *map_blocks = open(INPUT_PATH).read().split("\n\n")
 
-    with open(INPUT_PATH, "r") as input_file:
-        lines = input_file.readlines()
+    inputs = list(map(int, inputs.split(":")[1].split()))
 
-        load_maps(lines)
+    seed_tuples = []
+    for i in range(0, len(inputs), 2):
+        seed_tuples.append((inputs[i], inputs[i] + inputs[i + 1]))
 
-        seeds = lines[0].split(":")[1].strip().split()
-        seed_tuples = [(int(seeds[i-1]), int(seeds[i]))
-                       for i in range(1, len(seeds), 2)]
+    for block in map_blocks:
+        map_ranges = []
+        for line in block.splitlines()[1:]:
+            map_ranges.append(list(map(int, line.split())))
 
-        for seed_tuple in seed_tuples:
-            for i in range(seed_tuple[0], seed_tuple[0] + seed_tuple[1]):
-                location = find_location(i)
-                min_location = min(min_location, location)
-                print(f"Seed {i} is located at {location}")
+        mapped_locations = []
+        while len(seed_tuples) > 0:
+            start, end = seed_tuples.pop()
+            for destination_start, source_start, range_len in map_ranges:
+                overlap_start = max(start, source_start)
+                overlap_end = min(end, source_start + range_len)
+                if overlap_start < overlap_end:
+                    mapped_locations.append(
+                        (overlap_start - source_start + destination_start,
+                         overlap_end - source_start + destination_start))
+                    if overlap_start > start:
+                        seed_tuples.append((start, overlap_start))
+                    if end > overlap_end:
+                        seed_tuples.append((overlap_end, end))
+                    break
+            else:
+                mapped_locations.append((start, end))
+        seed_tuples = mapped_locations
 
-    print(f"Minimum location for part 2: {min_location}")
+    print(f"Minimum location - part 2: {min(seed_tuples)[0]}")
 
 
 def main():
