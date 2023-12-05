@@ -1,4 +1,4 @@
-INPUT_PATH = "input-files/2023/05/input-sample.txt"
+INPUT_PATH = "input-files/2023/05/input.txt"
 
 
 def part_1():
@@ -40,14 +40,14 @@ def part_2():
         for line in block.splitlines()[1:]:
             map_ranges.append(list(map(int, line.split())))
 
-        mapped_locations = []
+        new_mapped_ranges = []
         while len(seed_tuples) > 0:
             start, end = seed_tuples.pop()
             for destination_start, source_start, range_len in map_ranges:
                 overlap_start = max(start, source_start)
                 overlap_end = min(end, source_start + range_len)
                 if overlap_start < overlap_end:
-                    mapped_locations.append(
+                    new_mapped_ranges.append(
                         (overlap_start - source_start + destination_start,
                          overlap_end - source_start + destination_start))
                     if overlap_start > start:
@@ -56,8 +56,8 @@ def part_2():
                         seed_tuples.append((overlap_end, end))
                     break
             else:
-                mapped_locations.append((start, end))
-        seed_tuples = mapped_locations
+                new_mapped_ranges.append((start, end))
+        seed_tuples = new_mapped_ranges
 
     print(f"Minimum location - part 2: {min(seed_tuples)[0]}")
 
