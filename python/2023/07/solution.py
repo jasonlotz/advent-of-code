@@ -30,18 +30,10 @@ CARD_VALUES = {
 }
 
 
+# Given a hand counter, return the hand value
 def calc_hand_counter_value(hand_counter):
     hand_value = HAND_TYPES[tuple(sorted(hand_counter.values(), reverse=True))]
     return hand_value
-
-
-def hand_value(hand: str) -> int:
-    hand_counter = Counter(hand)
-    hand_value = calc_hand_counter_value(hand_counter)
-
-    high_card_score = calc_high_card_score(hand)
-
-    return hand_value, high_card_score
 
 
 def calc_high_card_score(hand, jokers=False):
@@ -55,6 +47,15 @@ def calc_high_card_score(hand, jokers=False):
         high_card_score += card_values[card] * multiplier
         multiplier /= 100
     return high_card_score
+
+
+def hand_value(hand: str) -> int:
+    hand_counter = Counter(hand)
+    hand_value = calc_hand_counter_value(hand_counter)
+
+    high_card_score = calc_high_card_score(hand)
+
+    return hand_value, high_card_score
 
 
 def hand_value_with_jokers(hand: str) -> int:
