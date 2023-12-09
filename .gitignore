@@ -22,3 +22,6 @@ yarn-error.*
 
 # VSCode
 .vscode/*
+
+# Python virtual environment
+.venv/
