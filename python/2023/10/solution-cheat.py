@@ -1,7 +1,11 @@
 INPUT_PATH = "input-files/2023/10/input.txt"
 
-with open(INPUT_PATH, "r") as input_file:
-    read_data = input_file.read().strip().split("\n")
+
+def parse_input():
+    with open(INPUT_PATH, "r") as input_file:
+        input = input_file.read().strip().split("\n")
+
+    return input
 
 
 class PipeLoop:
@@ -93,6 +97,12 @@ class PipeLoop:
         return enclosed
 
 
-pipes = PipeLoop(read_data)
-print("Part 1:", len(pipes.loop) // 2)
-print("Part 2:", len(pipes.enclosed))
+def main():
+    input = parse_input()
+    pipes = PipeLoop(input)
+    print("Part 1:", len(pipes.loop) // 2)
+    print("Part 2:", len(pipes.enclosed))
+
+
+if __name__ == "__main__":
+    main()
