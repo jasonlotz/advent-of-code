@@ -1,63 +1,110 @@
 import fs from "fs";
 
-function validate_input(lines: string[]) {
-  let nice_strings = 0;
-  let naughty_strings = 0;
+function isNicePart1(inputString: string): boolean {
+  let vowelCount = 0;
+  let hasDoubleLetter = false;
+  let hasFoundNaughtyString = false;
 
-  for (const line of lines) {
-    if (is_nice(line)) {
-      nice_strings += 1;
-    } else {
-      naughty_strings += 1;
-    }
-  }
-
-  console.log(`Nice strings: ${nice_strings}`);
-  console.log(`Naughty strings: ${naughty_strings}`);
-}
-
-function is_nice(input_string: string): boolean {
-  let vowel_count = 0;
-  let double_letter = false;
-  let found_naughty_string = false;
-
-  for (let i = 0; i < input_string.length; i++) {
-    if ("aeiou".indexOf(input_string[i]) !== -1) {
-      vowel_count += 1;
+  for (let i = 0; i < inputString.length; i++) {
+    if ("aeiou".indexOf(inputString[i]) !== -1) {
+      vowelCount += 1;
     }
 
-    if (i > 0 && input_string[i] == input_string[i - 1] && !double_letter) {
-      double_letter = true;
+    if (i > 0 && inputString[i] == inputString[i - 1] && !hasDoubleLetter) {
+      hasDoubleLetter = true;
     }
 
     if (
-      (i > 0 && input_string[i] == "b" && input_string[i - 1] == "a") ||
-      (input_string[i] == "d" && input_string[i - 1] == "c") ||
-      (input_string[i] == "q" && input_string[i - 1] == "p") ||
-      (input_string[i] == "y" && input_string[i - 1] == "x")
+      (i > 0 && inputString[i] == "b" && inputString[i - 1] == "a") ||
+      (inputString[i] == "d" && inputString[i - 1] == "c") ||
+      (inputString[i] == "q" && inputString[i - 1] == "p") ||
+      (inputString[i] == "y" && inputString[i - 1] == "x")
     ) {
-      found_naughty_string = true;
+      hasFoundNaughtyString = true;
     }
   }
 
-  return vowel_count >= 3 && double_letter && !found_naughty_string;
+  return vowelCount >= 3 && hasDoubleLetter && !hasFoundNaughtyString;
+}
+
+function isNicePart2(inputString: string): boolean {
+  let hasRepeatingLetter = false;
+  let hasPairOfLetters = false;
+
+  for (let i = 0; i < inputString.length; i++) {
+    if (i > 1 && inputString[i] == inputString[i - 2]) {
+      hasRepeatingLetter = true;
+    }
+
+    if (!hasPairOfLetters) {
+      const pair = inputString[i] + inputString[i + 1];
+      for (let j = i + 2; j < inputString.length - 1; j++) {
+        if (inputString[j] + inputString[j + 1] == pair) {
+          hasPairOfLetters = true;
+          break;
+        }
+      }
+    }
+  }
+
+  if (hasRepeatingLetter && hasPairOfLetters) {
+    return true;
+  }
+
+  return false;
 }
 
 function main() {
   const input = fs.readFileSync("input-files/2015/05/input.txt", "utf-8");
   const lines = input.split("\n");
-  validate_input(lines);
+
+  let niceStringsPart1 = 0;
+  let naughtyStringsPart1 = 0;
+
+  let niceStringsPart2 = 0;
+  let naughtyStringsPart2 = 0;
+
+  for (const line of lines) {
+    if (isNicePart1(line)) {
+      niceStringsPart1 += 1;
+    } else {
+      naughtyStringsPart1 += 1;
+    }
+
+    if (isNicePart2(line)) {
+      niceStringsPart2 += 1;
+    } else {
+      naughtyStringsPart2 += 1;
+    }
+  }
+
+  console.log(`Nice strings (part 1): ${niceStringsPart1}`);
+  console.log(`Naughty strings (part 1): ${naughtyStringsPart1}`);
+
+  console.log(`Nice strings (part 2): ${niceStringsPart2}`);
+  console.log(`Naughty strings (part 2): ${naughtyStringsPart2}`);
 }
 
-function test() {
-  console.assert(is_nice("ugknbfddgicrmopn") == true, "ugknbfddgicrmopn is nice");
-  console.assert(is_nice("aaa") == true, "aaa is nice");
-  console.assert(is_nice("jchzalrnumimnmhp") == false, "jchzalrnumimnmhp is naughty because no double letter");
-  console.assert(is_nice("haegwjzuvuyypxyu") == false, "haegwjzuvuyypxyu is naughty because contains xy");
-  console.assert(is_nice("haegwjzuvuyypcdu") == false, "haegwjzuvuyypcdu is naughty because contains cd");
-  console.assert(is_nice("vukmuyfstgmscuab") == false, "vukmuyfstgmscuab is naughty because contains ab");
-  console.assert(is_nice("dvszwmarrgswjxmb") == false, "dvszwmarrgswjxmb is naughty because contains only one vowel");
+function testPart1() {
+  console.assert(isNicePart1("ugknbfddgicrmopn") == true, "ugknbfddgicrmopn is nice");
+  console.assert(isNicePart1("aaa") == true, "aaa is nice");
+  console.assert(isNicePart1("jchzalrnumimnmhp") == false, "jchzalrnumimnmhp is naughty because no double letter");
+  console.assert(isNicePart1("haegwjzuvuyypxyu") == false, "haegwjzuvuyypxyu is naughty because contains xy");
+  console.assert(isNicePart1("haegwjzuvuyypcdu") == false, "haegwjzuvuyypcdu is naughty because contains cd");
+  console.assert(isNicePart1("vukmuyfstgmscuab") == false, "vukmuyfstgmscuab is naughty because contains ab");
+  console.assert(
+    isNicePart1("dvszwmarrgswjxmb") == false,
+    "dvszwmarrgswjxmb is naughty because contains only one vowel"
+  );
+}
+
+function testPart2() {
+  console.assert(isNicePart2("qjhvhtzxzqqjkmpb") == true, "qjhvhtzxzqqjkmpb is nice");
+  console.assert(isNicePart2("xxyxx") == true, "xxyxx is nice");
+  console.assert(isNicePart2("uurcxstgmygtbstg") == false, "uurcxstgmygtbstg is naughty because no repeating letter");
+  console.assert(isNicePart2("ieodomkazucvgmuy") == false, "ieodomkazucvgmuy is naughty because no pair of letters");
 }
 
 main();
-test();
+testPart1();
+testPart2();
