@@ -17,15 +17,11 @@ def manhattan_distance_total(grid, expand_scale=0):
     total = 0
 
     for i, (r1, c1) in enumerate(galaxies):
-        print(f"r1: {r1}, c1: {c1}")
         for (r2, c2) in galaxies[:i]:
-            print(f"r2: {r2}, c2: {c2}")
             for r in range(min(r1, r2), max(r1, r2)):
                 total += expand_scale if r in empty_rows else 1
-                print(f"Current total (r loop): {total}")
             for c in range(min(c1, c2), max(c1, c2)):
                 total += expand_scale if c in empty_cols else 1
-                print(f"Current total (c loop): {total}")
 
     return total
 
