@@ -28,13 +28,33 @@ def part1():
 
 
 def part2():
-  # TODO: Implement part 2
-  # for each value in input:
-  # parse the first two letter and get the hash value (which is the map key)
-  # parse the remainder of the string
-  # if -, then remove the label from the linked list of labels for the map key
-  # if =X, then append (or replace if exists) the label to the linked list of labels for the map key
-  pass
+  boxes = [[] for _ in range(256)]
+
+  focal_lengths = {}
+
+  for instruction in parse_input():
+    if "-" in instruction:
+      label = instruction[:-1]
+      index = hash_algorithm(label)
+      if label in boxes[index]:
+        boxes[index].remove(label)
+    else:
+      label, length = instruction.split("=")
+      length = int(length)
+
+      index = hash_algorithm(label)
+      if label not in boxes[index]:
+        boxes[index].append(label)
+
+      focal_lengths[label] = length
+
+  total = 0
+
+  for box_number, box in enumerate(boxes, 1):
+    for lens_slot, label in enumerate(box, 1):
+      total += box_number * lens_slot * focal_lengths[label]
+
+  print(f"Total part 2: {total}")
 
 
 def main():
