@@ -17,10 +17,8 @@ def hash_algorithm(value):
 
 
 def part1():
-  input = parse_input()
   total = 0
-
-  for value in input:
+  for value in parse_input():
     hashed_value = hash_algorithm(value)
     total += hashed_value
 
@@ -29,7 +27,6 @@ def part1():
 
 def part2():
   boxes = [[] for _ in range(256)]
-
   focal_lengths = {}
 
   for instruction in parse_input():
