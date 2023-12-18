@@ -13,14 +13,14 @@ const chars = input.split("");
 let floor = 0;
 
 for (let i = 0; i < chars.length; i++) {
-    if (chars[i] === "(") {
-        floor++;
-    } else if (chars[i] === ")") {
-        floor--;
-    }
+  if (chars[i] === "(") {
+    floor++;
+  } else if (chars[i] === ")") {
+    floor--;
+  }
 
-    if (floor === -1) {
-        console.log(`Basement at position #: ${i + 1}`);
-        break;
-    }
+  if (floor === -1) {
+    console.log(`Basement at position #: ${i + 1}`);
+    break;
+  }
 }
