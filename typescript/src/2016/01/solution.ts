@@ -45,6 +45,7 @@ function changeDirection(
   }
   throw new Error("Invalid direction");
 }
+
 function newPosition(
   direction: Direction,
   currentPosition: Position,
