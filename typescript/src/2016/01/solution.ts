@@ -102,16 +102,15 @@ function main() {
   const visitedPositions: Position[] = [];
   let foundHq = false;
 
-  for (const instruction of input.split(", ")) {
-    const parsedInstruction = parseInstruction(instruction);
-    const newDirection = changeDirection(
-      currentDirection,
-      parsedInstruction[0],
-    );
+  for (const instructionStr of input.split(", ")) {
+    const instruction = parseInstruction(instructionStr);
+    const [leftOrRight, distance] = instruction;
+
+    const newDirection = changeDirection(currentDirection, leftOrRight);
     const newPositions = updatePositions(
       newDirection,
       currentPosition,
-      parsedInstruction[1],
+      distance,
     );
 
     currentDirection = newDirection;
@@ -120,7 +119,7 @@ function main() {
     if (!foundHq) {
       foundHq = checkPositionsForHq(newPositions, visitedPositions);
     }
-    
+
     visitedPositions.push(...newPositions);
   }
 
