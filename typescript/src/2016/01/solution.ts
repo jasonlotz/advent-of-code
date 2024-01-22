@@ -45,58 +45,90 @@ function changeDirection(
   }
   throw new Error("Invalid direction");
 }
-
-function updatePosition(
-  currentDirection: Direction,
+function newPosition(
+  direction: Direction,
   currentPosition: Position,
-  instruction: Instruction,
 ): Position {
-  const [leftOrRight, distance] = instruction;
-
-  if (currentDirection === "N") {
-    if (leftOrRight === "L") {
-      return [currentPosition[0] - distance, currentPosition[1]];
-    } else {
-      return [currentPosition[0] + distance, currentPosition[1]];
-    }
-  } else if (currentDirection === "E") {
-    if (leftOrRight === "L") {
-      return [currentPosition[0], currentPosition[1] + distance];
-    } else {
-      return [currentPosition[0], currentPosition[1] - distance];
-    }
-  } else if (currentDirection === "S") {
-    if (leftOrRight === "L") {
-      return [currentPosition[0] + distance, currentPosition[1]];
-    } else {
-      return [currentPosition[0] - distance, currentPosition[1]];
-    }
-  } else if (currentDirection === "W") {
-    if (leftOrRight === "L") {
-      return [currentPosition[0], currentPosition[1] - distance];
-    } else {
-      return [currentPosition[0], currentPosition[1] + distance];
-    }
+  if (direction === "N") {
+    return [currentPosition[0], currentPosition[1] + 1];
+  } else if (direction === "E") {
+    return [currentPosition[0] + 1, currentPosition[1]];
+  } else if (direction === "S") {
+    return [currentPosition[0], currentPosition[1] - 1];
+  } else if (direction === "W") {
+    return [currentPosition[0] - 1, currentPosition[1]];
   }
   throw new Error("Invalid direction");
 }
 
-let currentPosition: Position = [0, 0];
-let currentDirection: Direction = "N";
+function updatePositions(
+  currentDirection: Direction,
+  currentPosition: Position,
+  distance: number,
+): Position[] {
+  const result: Position[] = [];
 
-for (const instruction of input.split(", ")) {
-  const parsedInstruction = parseInstruction(instruction);
-  const newDirection = changeDirection(currentDirection, parsedInstruction[0]);
-  const newPosition = updatePosition(
-    currentDirection,
-    currentPosition,
-    parsedInstruction,
-  );
+  for (let i = 0; i < distance; i++) {
+    const newPos = newPosition(currentDirection, currentPosition);
+    result.push(newPos);
+    currentPosition = newPos;
+  }
 
-  currentDirection = newDirection;
-  currentPosition = newPosition;
+  return result;
 }
 
-console.log("Part 1:");
-console.log(`Current position: ${currentPosition}`);
-console.log(`Distance: ${Math.abs(currentPosition[0]) + Math.abs(currentPosition[1])} blocks away`);
+function checkPositionsForHq(
+  newPositions: Position[],
+  visitedPositions: Position[],
+): boolean {
+  for (const position of newPositions) {
+    if (
+      visitedPositions.some((p) => p[0] === position[0] && p[1] === position[1])
+    ) {
+      console.log("Part 2:");
+      console.log(`First visited position twice: ${position}`);
+      console.log(
+        `Distance: ${Math.abs(position[0]) + Math.abs(position[1])} blocks away`,
+      );
+      return true;
+    }
+  }
+  return false;
+}
+
+function main() {
+  let currentPosition: Position = [0, 0];
+  let currentDirection: Direction = "N";
+  const visitedPositions: Position[] = [];
+  let foundHq = false;
+
+  for (const instruction of input.split(", ")) {
+    const parsedInstruction = parseInstruction(instruction);
+    const newDirection = changeDirection(
+      currentDirection,
+      parsedInstruction[0],
+    );
+    const newPositions = updatePositions(
+      newDirection,
+      currentPosition,
+      parsedInstruction[1],
+    );
+
+    currentDirection = newDirection;
+    currentPosition = newPositions.at(-1)!;
+
+    if (!foundHq) {
+      foundHq = checkPositionsForHq(newPositions, visitedPositions);
+    }
+    
+    visitedPositions.push(...newPositions);
+  }
+
+  console.log("Part 1:");
+  console.log(`Current position: ${currentPosition}`);
+  console.log(
+    `Distance: ${Math.abs(currentPosition[0]) + Math.abs(currentPosition[1])} blocks away`,
+  );
+}
+
+main();
