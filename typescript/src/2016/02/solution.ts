@@ -77,6 +77,7 @@ function part2() {
 
   processInstructions(keypad);
 }
+
 function main() {
   part1();
   part2();
