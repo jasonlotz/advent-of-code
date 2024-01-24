@@ -45,39 +45,39 @@ throw_lose_map = {
 
 
 def round(theirs, ours):
-  points = shape_points_map[ours]
-  points += outcome_points_map[ours, theirs]
+    points = shape_points_map[ours]
+    points += outcome_points_map[ours, theirs]
 
-  return points
+    return points
 
 
 def throw_round(theirs, ours):
-  new_ours = ours
+    new_ours = ours
 
-  if ours == "X":
-    # Lose
-    new_ours = throw_lose_map[theirs]
-  elif ours == "Y":
-    # Tie
-    new_ours = throw_tie_map[theirs]
-  elif ours == "Z":
-    # Win
-    new_ours = throw_win_map[theirs]
+    if ours == "X":
+        # Lose
+        new_ours = throw_lose_map[theirs]
+    elif ours == "Y":
+        # Tie
+        new_ours = throw_tie_map[theirs]
+    elif ours == "Z":
+        # Win
+        new_ours = throw_win_map[theirs]
 
-  points = shape_points_map[new_ours]
-  points += outcome_points_map[new_ours, theirs]
+    points = shape_points_map[new_ours]
+    points += outcome_points_map[new_ours, theirs]
 
-  return points
+    return points
 
 
 total_points = 0
 throw_total_points = 0
 
 with open(INPUT_PATH, "r") as input_file:
-  for line in input_file:
-    theirs, ours = line.replace("\n", "").split(" ")
-    total_points += round(theirs, ours)
-    throw_total_points += throw_round(theirs, ours)
+    for line in input_file:
+        theirs, ours = line.replace("\n", "").split(" ")
+        total_points += round(theirs, ours)
+        throw_total_points += throw_round(theirs, ours)
 
 print(f"Total points: {total_points}")
 print(f"Throw total points: {throw_total_points}")
