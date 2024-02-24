@@ -8,17 +8,20 @@ import (
 )
 
 func main() {
-	f, err := os.ReadFile("input-files/2017/01/input.txt")
+	file, err := os.ReadFile("../../../input-files/2017/01/input.txt")
 	if err != nil {
 		fmt.Print(err)
 	}
 
-	input := strings.TrimSpace(string(f))
-	part1(input)
-	part2(input)
+	input := strings.TrimSpace(string(file))
+	part1Answer := sumCaptchaNext(input)
+	part2Answer := sumCaptchaHalfway(input)
+
+	fmt.Printf("Part 1 answer: %d\n", part1Answer)
+	fmt.Printf("Part 2 answer: %d\n", part2Answer)
 }
 
-func part1(input string) {
+func sumCaptchaNext(input string) int {
 	sum := 0
 	for i := 1; i < len(input); i++ {
 		first, err := strconv.Atoi(string(input[i-1]))
@@ -47,10 +50,10 @@ func part1(input string) {
 		sum += last
 	}
 
-	fmt.Printf("Part 1 answer is: %d\n", sum)
+	return sum
 }
 
-func part2(input string) {
+func sumCaptchaHalfway(input string) int {
 	sum := 0
 	totalElements := len(input)
 	fmt.Printf("Total Elements: %d\n", totalElements)
@@ -74,5 +77,5 @@ func part2(input string) {
 		}
 	}
 
-	fmt.Printf("Part 2 answer is: %d\n", sum)
+	return sum
 }
