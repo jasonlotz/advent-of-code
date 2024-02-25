@@ -15,7 +15,7 @@ func TestSum(t *testing.T) {
 	for _, test := range tests {
 		result := sum(test.input)
 		if result != test.expected {
-			t.Errorf("%v -> expected %d for part 1 but got %d", test.input, test.expected, result)
+			t.Errorf("%v -> expected %d but got %d", test.input, test.expected, result)
 		}
 	}
 }
@@ -34,7 +34,7 @@ func TestSeenTwice(t *testing.T) {
 	for _, test := range tests {
 		result := seenTwice(test.input)
 		if result != test.expected {
-			t.Errorf("%v -> expected %d for part 2 but got %d", test.input, test.expected, result)
+			t.Errorf("%v -> expected %d but got %d", test.input, test.expected, result)
 		}
 	}
 }

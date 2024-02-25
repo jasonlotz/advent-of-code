@@ -13,7 +13,7 @@ func TestProcessJumpsPart1(t *testing.T) {
 	for _, test := range tests {
 		result := processJumpsPart1(test.input)
 		if result != test.expected {
-			t.Errorf("%v -> expected %d for part 1 but got %d", test.input, test.expected, result)
+			t.Errorf("%v -> expected %d but got %d", test.input, test.expected, result)
 		}
 	}
 }
@@ -29,7 +29,7 @@ func TestProcessJumpsPart2(t *testing.T) {
 	for _, test := range tests {
 		result := processJumpsPart2(test.input)
 		if result != test.expected {
-			t.Errorf("%v -> expected %d for part 2 but got %d", test.input, test.expected, result)
+			t.Errorf("%v -> expected %d but got %d", test.input, test.expected, result)
 		}
 	}
 }

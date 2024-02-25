@@ -18,7 +18,7 @@ func TestSumCaptchaNext(t *testing.T) {
 	for _, test := range tests {
 		result := sumCaptchaNext(test.input)
 		if result != test.expected {
-			t.Errorf("%s -> expected %d for sumCaptchaNext but got %d", test.input, test.expected, result)
+			t.Errorf("%s -> expected %d but got %d", test.input, test.expected, result)
 		}
 	}
 }
@@ -38,7 +38,7 @@ func TestSumCaptchaHalfway(t *testing.T) {
 	for _, test := range tests {
 		result := sumCaptchaHalfway(test.input)
 		if result != test.expected {
-			t.Errorf("%s -> expected %d for sumCaptchaHalfway but got %d", test.input, test.expected, result)
+			t.Errorf("%s -> expected %d but got %d", test.input, test.expected, result)
 		}
 	}
 }
