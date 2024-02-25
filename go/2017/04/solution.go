@@ -3,19 +3,16 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/jasonlotz/advent-of-code/go/utils"
 	"os"
 	"sort"
 	"strings"
 )
 
-func main() {
-	file, err := os.Open("../../../input-files/2017/04/input.txt")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+var INPUT_FILE = "../../../input-files/2017/04/input.txt"
 
-	passphrases := processFile(file)
+func main() {
+	passphrases := utils.ProcessStringLinesFile(INPUT_FILE)
 
 	validBasicPassphrases := 0
 	validAnagramPassphrases := 0

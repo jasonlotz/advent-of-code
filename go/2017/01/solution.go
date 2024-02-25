@@ -2,18 +2,16 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strconv"
-	"strings"
+
+	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-func main() {
-	file, err := os.ReadFile("../../../input-files/2017/01/input.txt")
-	if err != nil {
-		fmt.Print(err)
-	}
+var INPUT_FILE = "../../../input-files/2017/01/input.txt"
 
-	input := strings.TrimSpace(string(file))
+func main() {
+	input := utils.ProcessSingleStringLineFile(INPUT_FILE)
+
 	part1Answer := sumCaptchaNext(input)
 	part2Answer := sumCaptchaHalfway(input)
 

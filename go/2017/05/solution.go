@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
+	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
 var INPUT_FILE = "../../../input-files/2017/05/input.txt"
@@ -15,37 +13,15 @@ func main() {
 }
 
 func part1() {
-	jumpOffsets := processFile(INPUT_FILE)
+	jumpOffsets := utils.ProcessIntLinesFile(INPUT_FILE)
 	jumpCount := processJumpsPart1(jumpOffsets)
 	fmt.Println("Jumps to escape (part 1):", jumpCount)
 }
 
 func part2() {
-	jumpOffsets := processFile(INPUT_FILE)
+	jumpOffsets := utils.ProcessIntLinesFile(INPUT_FILE)
 	jumpCount := processJumpsPart2(jumpOffsets)
 	fmt.Println("Jumps to escape: (part 2)", jumpCount)
-}
-
-func processFile(inputFile string) []int {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	processedFile := make([]int, 0)
-
-	for scanner.Scan() {
-		intVal, err := strconv.Atoi(scanner.Text())
-		if err != nil {
-			panic(err)
-		}
-
-		processedFile = append(processedFile, intVal)
-	}
-
-	return processedFile
 }
 
 func processJumpsPart1(jumps []int) int {

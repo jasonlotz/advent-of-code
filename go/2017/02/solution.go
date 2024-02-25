@@ -1,21 +1,15 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
+
+	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-func main() {
-	file, err := os.Open("../../../input-files/2017/02/input.txt")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+var INPUT_FILE = "../../../input-files/2017/02/input.txt"
 
-	values := processFile(file)
+func main() {
+	values := utils.ProcessIntsLinesFile(INPUT_FILE)
 	part1Score, part2Score := calcScores(values)
 
 	fmt.Println("Part 1 score:", part1Score)
@@ -35,34 +29,6 @@ func calcScores(values [][]int) (part1Score, part2Score int) {
 	}
 
 	return part1Score, part2Score
-}
-
-func processFile(file *os.File) [][]int {
-	scanner := bufio.NewScanner(file)
-	processedFile := make([][]int, 0)
-
-	for scanner.Scan() {
-		processedLine := processLine(scanner.Text())
-		processedFile = append(processedFile, processedLine)
-	}
-
-	return processedFile
-}
-
-func processLine(line string) []int {
-	stringVals := strings.Fields(line)
-	intVals := make([]int, len(stringVals))
-
-	for i, s := range stringVals {
-		intVal, err := strconv.Atoi(s)
-		if err != nil {
-			panic(err)
-		}
-
-		intVals[i] = intVal
-	}
-
-	return intVals
 }
 
 func findMinMax(numbers []int) (min, max int) {

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
 var INPUT_FILE = "../../../input-files/2018/01/input.txt"
@@ -15,13 +17,13 @@ func main() {
 }
 
 func part1() {
-	inputs := processFile(INPUT_FILE)
+	inputs := utils.ProcessIntLinesFile(INPUT_FILE)
 	sum := sum(inputs)
 	fmt.Println("Part 1:", sum)
 }
 
 func part2() {
-	inputs := processFile(INPUT_FILE)
+	inputs := utils.ProcessIntLinesFile(INPUT_FILE)
 	result := seenTwice(inputs)
 	fmt.Println("Part 2:", result)
 }
