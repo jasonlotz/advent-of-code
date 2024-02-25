@@ -68,6 +68,7 @@ func findOneOffMatch(words []string) string {
 
 	for _, word := range words {
 		for i := 0; i < len(word); i++ {
+			// slice indices are inclusive:exclusive and can exceed the length of the array
 			newWord := word[:i] + "?" + word[i+1:]
 			if seen[newWord] {
 				return newWord
