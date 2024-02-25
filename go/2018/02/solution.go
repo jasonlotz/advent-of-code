@@ -10,7 +10,7 @@ var INPUT_FILE = "../../../input-files/2018/02/input.txt"
 
 func main() {
 	part1()
-	// part2()
+	part2()
 }
 
 func part1() {
@@ -49,11 +49,32 @@ func part1() {
 	fmt.Println("Part 1: ", found2Count*found3Count)
 }
 
+func part2() {
+	values := utils.ProcessStringLinesFile(INPUT_FILE)
+	oneOffMatch := findOneOffMatch(values)
+	fmt.Println("Part 2: ", oneOffMatch)
+}
+
 func countLetters(word string) map[string]int {
 	letterCount := make(map[string]int)
 	for _, letter := range word {
-
 		letterCount[string(letter)]++
 	}
 	return letterCount
+}
+
+func findOneOffMatch(words []string) string {
+	seen := make(map[string]bool)
+
+	for _, word := range words {
+		for i := 0; i < len(word); i++ {
+			newWord := word[:i] + "?" + word[i+1:]
+			if seen[newWord] {
+				return newWord
+			}
+			seen[newWord] = true
+		}
+	}
+
+	return ""
 }

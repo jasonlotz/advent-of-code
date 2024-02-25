@@ -26,3 +26,19 @@ func TestCountLetters(t *testing.T) {
 		}
 	}
 }
+
+func TestOneOffMatch(t *testing.T) {
+	tests := []struct {
+		input    []string
+		expected string
+	}{
+		{[]string{"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"}, "fg?ij"},
+	}
+
+	for _, test := range tests {
+		result := findOneOffMatch(test.input)
+		if result != test.expected {
+			t.Errorf("%s -> expected %s but got %s", test.input, test.expected, result)
+		}
+	}
+}
