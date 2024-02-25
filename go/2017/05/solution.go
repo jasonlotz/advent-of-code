@@ -7,20 +7,21 @@ import (
 	"strconv"
 )
 
+var INPUT_FILE = "../../../input-files/2017/05/input.txt"
+
 func main() {
 	part1()
 	part2()
 }
 
 func part1() {
-
-	jumpOffsets := processFile("../../../input-files/2017/05/input.txt")
+	jumpOffsets := processFile(INPUT_FILE)
 	jumpCount := processJumpsPart1(jumpOffsets)
 	fmt.Println("Jumps to escape (part 1):", jumpCount)
 }
 
 func part2() {
-	jumpOffsets := processFile("../../../input-files/2017/05/input.txt")
+	jumpOffsets := processFile(INPUT_FILE)
 	jumpCount := processJumpsPart2(jumpOffsets)
 	fmt.Println("Jumps to escape: (part 2)", jumpCount)
 }
