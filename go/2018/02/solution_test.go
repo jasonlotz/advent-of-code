@@ -20,8 +20,7 @@ func TestCountLetters(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result := countLetters(test.input)
-		if !utils.CompareMaps(result, test.expected) {
+		if result := countLetters(test.input); !utils.CompareMaps(result, test.expected) {
 			t.Errorf("%s -> expected %v but got %v", test.input, test.expected, result)
 		}
 	}
@@ -36,8 +35,7 @@ func TestOneOffMatch(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result := findOneOffMatch(test.input)
-		if result != test.expected {
+		if result := findOneOffMatch(test.input); result != test.expected {
 			t.Errorf("%s -> expected %s but got %s", test.input, test.expected, result)
 		}
 	}
