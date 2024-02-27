@@ -10,6 +10,7 @@ var INPUT_FILE = "../../../input-files/2019/02/input.txt"
 
 func main() {
 	part1()
+	part2()
 }
 
 func part1() {
@@ -19,6 +20,24 @@ func part1() {
 	opCodes[2] = 2
 	processOpCodes(opCodes)
 	fmt.Println("Part 1:", opCodes[0])
+}
+
+func part2() {
+	input := utils.ProcessSingleStringLineFile(INPUT_FILE)
+	opCodes := utils.CommaDelimitedStringToIntArray(input)
+	for noun := 0; noun < 100; noun++ {
+		for verb := 0; verb < 100; verb++ {
+			opCodesCopy := make([]int, len(opCodes))
+			copy(opCodesCopy, opCodes)
+			opCodesCopy[1] = noun
+			opCodesCopy[2] = verb
+			processOpCodes(opCodesCopy)
+			if opCodesCopy[0] == 19690720 {
+				fmt.Println("Part 2:", 100*noun+verb)
+				return
+			}
+		}
+	}
 }
 
 func processOpCodes(opCodes []int) {
