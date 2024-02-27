@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/jasonlotz/advent-of-code/go/utils"
+	"reflect"
 	"testing"
 )
 
@@ -20,7 +20,7 @@ func TestCountLetters(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		if result := countLetters(test.input); !utils.CompareMaps(result, test.expected) {
+		if result := countLetters(test.input); !reflect.DeepEqual(result, test.expected) {
 			t.Errorf("%s -> expected %v but got %v", test.input, test.expected, result)
 		}
 	}
