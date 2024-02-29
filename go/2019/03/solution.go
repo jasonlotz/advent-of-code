@@ -32,13 +32,13 @@ func part1() {
 	instructions1 := processInstructions(strings.Split(input[0], ","))
 	instructions2 := processInstructions(strings.Split(input[1], ","))
 
-	fmt.Println(instructions1)
-	fmt.Println(instructions2)
+	locations1 := getLocations(instructions1)
+	locations2 := getLocations(instructions2)
 
-	// TODO: Implement solution
-	// process instructions 1 tracking each location in a map/set
-	// process instructions 2 tracking each location in a map/set
-	// find the intersection of the two maps
+	intersections := findIntersections(locations1, locations2)
+
+	minDistance := findMinDistance(intersections)
+	fmt.Println("Part 1 (minDistance):", minDistance)
 }
 
 func processInstructions(stringInstructions []string) []Instruction {
@@ -55,4 +55,40 @@ func processInstructions(stringInstructions []string) []Instruction {
 	}
 
 	return instructions
+}
+
+func getLocations(instructions []Instruction) map[[2]int]bool {
+	locations := make(map[[2]int]bool)
+	currentLocation := [2]int{0, 0}
+
+	for _, instruction := range instructions {
+		for i := 0; i < instruction.distance; i++ {
+			currentLocation[0] += directions[instruction.direction][0]
+			currentLocation[1] += directions[instruction.direction][1]
+			locations[currentLocation] = true
+		}
+	}
+
+	return locations
+}
+
+func findIntersections(locations1 map[[2]int]bool, locations2 map[[2]int]bool) map[[2]int]bool {
+	intersections := make(map[[2]int]bool)
+	for loc := range locations1 {
+		if _, ok := locations2[loc]; ok {
+			intersections[loc] = true
+		}
+	}
+	return intersections
+}
+
+func findMinDistance(intersections map[[2]int]bool) int {
+	minDistance := -1
+	for loc := range intersections {
+		distance := utils.Abs(loc[0]) + utils.Abs(loc[1])
+		if minDistance == -1 || distance < minDistance {
+			minDistance = distance
+		}
+	}
+	return minDistance
 }
