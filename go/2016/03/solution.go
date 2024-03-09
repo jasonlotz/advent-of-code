@@ -6,7 +6,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2016/03/input.txt"
+var inputFile = "../../../input-files/2016/03/input.txt"
 
 func main() {
 	part1()
@@ -14,13 +14,13 @@ func main() {
 }
 
 func part1() {
-	input := utils.ProcessIntsLinesFile(INPUT_FILE)
+	input := utils.ProcessIntsLinesFile(inputFile)
 	validTriangles := countTrianglesHorizontal(input)
 	fmt.Println("Part 1:", validTriangles)
 }
 
 func part2() {
-	input := utils.ProcessIntsLinesFile(INPUT_FILE)
+	input := utils.ProcessIntsLinesFile(inputFile)
 	validTriangles := countTrianglesVertical(input)
 	fmt.Println("Part 2:", validTriangles)
 }

@@ -6,10 +6,10 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2017/02/input.txt"
+var inputFile = "../../../input-files/2017/02/input.txt"
 
 func main() {
-	values := utils.ProcessIntsLinesFile(INPUT_FILE)
+	values := utils.ProcessIntsLinesFile(inputFile)
 	part1Score, part2Score := calcScores(values)
 
 	fmt.Println("Part 1 score:", part1Score)

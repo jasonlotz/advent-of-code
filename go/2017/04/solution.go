@@ -9,10 +9,10 @@ import (
 	"strings"
 )
 
-var INPUT_FILE = "../../../input-files/2017/04/input.txt"
+var inputFile = "../../../input-files/2017/04/input.txt"
 
 func main() {
-	passphrases := utils.ProcessStringLinesFile(INPUT_FILE)
+	passphrases := utils.ProcessStringLinesFile(inputFile)
 
 	validBasicPassphrases := 0
 	validAnagramPassphrases := 0

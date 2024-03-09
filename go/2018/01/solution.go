@@ -6,7 +6,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2018/01/input.txt"
+var inputFile = "../../../input-files/2018/01/input.txt"
 
 func main() {
 	part1()
@@ -14,13 +14,13 @@ func main() {
 }
 
 func part1() {
-	inputs := utils.ProcessIntLinesFile(INPUT_FILE)
+	inputs := utils.ProcessIntLinesFile(inputFile)
 	sum := sum(inputs)
 	fmt.Println("Part 1:", sum)
 }
 
 func part2() {
-	inputs := utils.ProcessIntLinesFile(INPUT_FILE)
+	inputs := utils.ProcessIntLinesFile(inputFile)
 	result := seenTwice(inputs)
 	fmt.Println("Part 2:", result)
 }

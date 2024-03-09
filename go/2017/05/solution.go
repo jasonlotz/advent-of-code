@@ -5,7 +5,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2017/05/input.txt"
+var inputFile = "../../../input-files/2017/05/input.txt"
 
 func main() {
 	part1()
@@ -13,13 +13,13 @@ func main() {
 }
 
 func part1() {
-	jumpOffsets := utils.ProcessIntLinesFile(INPUT_FILE)
+	jumpOffsets := utils.ProcessIntLinesFile(inputFile)
 	jumpCount := processJumpsPart1(jumpOffsets)
 	fmt.Println("Jumps to escape (part 1):", jumpCount)
 }
 
 func part2() {
-	jumpOffsets := utils.ProcessIntLinesFile(INPUT_FILE)
+	jumpOffsets := utils.ProcessIntLinesFile(inputFile)
 	jumpCount := processJumpsPart2(jumpOffsets)
 	fmt.Println("Jumps to escape: (part 2)", jumpCount)
 }

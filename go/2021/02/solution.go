@@ -8,7 +8,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2021/02/input.txt"
+var inputFile = "../../../input-files/2021/02/input.txt"
 
 type Point struct {
 	x   int
@@ -27,7 +27,7 @@ func main() {
 }
 
 func part1() {
-	input := utils.ProcessStringLinesFile(INPUT_FILE)
+	input := utils.ProcessStringLinesFile(inputFile)
 	position := Point{x: 0, y: 0}
 
 	for _, line := range input {
@@ -39,7 +39,7 @@ func part1() {
 }
 
 func part2() {
-	input := utils.ProcessStringLinesFile(INPUT_FILE)
+	input := utils.ProcessStringLinesFile(inputFile)
 	position := Point{x: 0, y: 0, aim: 0}
 
 	for _, line := range input {

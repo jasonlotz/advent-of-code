@@ -6,7 +6,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2018/02/input.txt"
+var inputFile = "../../../input-files/2018/02/input.txt"
 
 func main() {
 	part1()
@@ -14,7 +14,7 @@ func main() {
 }
 
 func part1() {
-	values := utils.ProcessStringLinesFile(INPUT_FILE)
+	values := utils.ProcessStringLinesFile(inputFile)
 	found2Count := 0
 	found3Count := 0
 
@@ -50,7 +50,7 @@ func part1() {
 }
 
 func part2() {
-	values := utils.ProcessStringLinesFile(INPUT_FILE)
+	values := utils.ProcessStringLinesFile(inputFile)
 	oneOffMatch := findOneOffMatch(values)
 	fmt.Println("Part 2: ", oneOffMatch)
 }

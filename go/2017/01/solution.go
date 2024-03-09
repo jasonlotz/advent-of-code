@@ -7,10 +7,10 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2017/01/input.txt"
+var inputFile = "../../../input-files/2017/01/input.txt"
 
 func main() {
-	input := utils.ProcessSingleStringLineFile(INPUT_FILE)
+	input := utils.ProcessSingleStringLineFile(inputFile)
 
 	part1Answer := sumCaptchaNext(input)
 	part2Answer := sumCaptchaHalfway(input)

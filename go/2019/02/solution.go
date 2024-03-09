@@ -6,7 +6,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2019/02/input.txt"
+var inputFile = "../../../input-files/2019/02/input.txt"
 
 func main() {
 	part1()
@@ -14,7 +14,7 @@ func main() {
 }
 
 func part1() {
-	input := utils.ProcessSingleStringLineFile(INPUT_FILE)
+	input := utils.ProcessSingleStringLineFile(inputFile)
 	opCodes := utils.CommaDelimitedStringToIntArray(input)
 	opCodes[1] = 12
 	opCodes[2] = 2
@@ -23,7 +23,7 @@ func part1() {
 }
 
 func part2() {
-	input := utils.ProcessSingleStringLineFile(INPUT_FILE)
+	input := utils.ProcessSingleStringLineFile(inputFile)
 	opCodes := utils.CommaDelimitedStringToIntArray(input)
 	for noun := 0; noun < 100; noun++ {
 		for verb := 0; verb < 100; verb++ {

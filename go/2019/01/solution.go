@@ -6,10 +6,10 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2019/01/input.txt"
+var inputFile = "../../../input-files/2019/01/input.txt"
 
 func main() {
-	input := utils.ProcessIntLinesFile(INPUT_FILE)
+	input := utils.ProcessIntLinesFile(inputFile)
 
 	totalFuel := 0
 	totalFuelRecursive := 0

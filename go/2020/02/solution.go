@@ -6,7 +6,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2020/02/input.txt"
+var inputFile = "../../../input-files/2020/02/input.txt"
 
 type PasswordPolicy struct {
 	min      int
@@ -16,7 +16,7 @@ type PasswordPolicy struct {
 }
 
 func main() {
-	input := utils.ProcessStringLinesFile(INPUT_FILE)
+	input := utils.ProcessStringLinesFile(inputFile)
 	count1 := 0
 	count2 := 0
 

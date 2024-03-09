@@ -8,7 +8,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2018/03/input.txt"
+var inputFile = "../../../input-files/2018/03/input.txt"
 
 type Claim struct {
 	id     int
@@ -19,7 +19,7 @@ type Claim struct {
 }
 
 func main() {
-	input := utils.ProcessStringLinesFile(INPUT_FILE)
+	input := utils.ProcessStringLinesFile(inputFile)
 	claims := processInput(input)
 
 	fabric := make([][]int, 1000)

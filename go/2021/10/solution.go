@@ -7,7 +7,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2021/10/input.txt"
+var inputFile = "../../../input-files/2021/10/input.txt"
 
 var pointsPart1 = map[string]int{
 	")": 3,
@@ -38,7 +38,7 @@ var closeToOpen = map[string]string{
 }
 
 func main() {
-	input := utils.ProcessStringLinesFile(INPUT_FILE)
+	input := utils.ProcessStringLinesFile(inputFile)
 	part1Score := 0
 	part2Scores := make([]int, 0)
 

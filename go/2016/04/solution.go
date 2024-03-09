@@ -10,7 +10,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2016/04/input.txt"
+var inputFile = "../../../input-files/2016/04/input.txt"
 
 type Room struct {
 	name     string
@@ -19,7 +19,7 @@ type Room struct {
 }
 
 func main() {
-	input := utils.ProcessStringLinesFile(INPUT_FILE)
+	input := utils.ProcessStringLinesFile(inputFile)
 	rooms := processInput(input)
 	invalidSectorIdSum := 0
 

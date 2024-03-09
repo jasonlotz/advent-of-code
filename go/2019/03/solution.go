@@ -8,7 +8,7 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var INPUT_FILE = "../../../input-files/2019/03/input.txt"
+var inputFile = "../../../input-files/2019/03/input.txt"
 
 type Instruction struct {
 	direction string
@@ -23,7 +23,7 @@ var directions = map[string][2]int{
 }
 
 func main() {
-	input := utils.ProcessStringLinesFile(INPUT_FILE)
+	input := utils.ProcessStringLinesFile(inputFile)
 
 	instructions1 := processInstructions(strings.Split(input[0], ","))
 	instructions2 := processInstructions(strings.Split(input[1], ","))
