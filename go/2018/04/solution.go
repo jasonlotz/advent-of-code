@@ -17,7 +17,7 @@ type Action struct {
 	Day     int
 	Hour    int
 	Minute  int
-	GuardID int
+	GuardId int
 	Type    ActionType
 }
 
@@ -28,6 +28,12 @@ const (
 	FallAsleep
 	WakeUp
 )
+
+type GuardSleepMap map[int]DateSleepMap
+
+type DateSleepMap map[string]MinutesSlept
+
+type MinutesSlept []int
 
 func getInput() []string {
 	file := inputFile
@@ -81,7 +87,7 @@ func parseInput(input []string) []Action {
 			action.Type = WakeUp
 		default:
 			action.Type = BeginShift
-			_, _ = fmt.Sscanf(rawAction, "Guard #%d begins shift", &action.GuardID)
+			_, _ = fmt.Sscanf(rawAction, "Guard #%d begins shift", &action.GuardId)
 		}
 
 		actions = append(actions, action)
@@ -90,8 +96,8 @@ func parseInput(input []string) []Action {
 	return actions
 }
 
-func processActions(actions []Action) map[int]map[string][]int {
-	guardSleep := map[int]map[string][]int{}
+func processActions(actions []Action) GuardSleepMap {
+	guardSleep := GuardSleepMap{}
 	lastGuard := 0
 	lastDate := ""
 	lastFellAsleep := 0
@@ -100,17 +106,17 @@ func processActions(actions []Action) map[int]map[string][]int {
 		lastDate = fmt.Sprintf("%d-%d-%d", action.Year, action.Month, action.Day)
 
 		if action.Type == BeginShift {
-			lastGuard = action.GuardID
+			lastGuard = action.GuardId
 
 			// If the guard isn't in the map, add them
 			if _, ok := guardSleep[lastGuard]; !ok {
-				guardSleep[lastGuard] = map[string][]int{}
+				guardSleep[lastGuard] = DateSleepMap{}
 			}
 		}
 
 		// If the date isn't in the guard's map, add it
 		if _, ok := guardSleep[lastGuard][lastDate]; !ok {
-			guardSleep[lastGuard][lastDate] = make([]int, 60)
+			guardSleep[lastGuard][lastDate] = make(MinutesSlept, 60)
 		}
 
 		if action.Type == FallAsleep {
@@ -127,7 +133,7 @@ func processActions(actions []Action) map[int]map[string][]int {
 	return guardSleep
 }
 
-func findSleepiestGuard(guardSleep map[int]map[string][]int) (sleepiestGuard int, sleepiestMinute int) {
+func findSleepiestGuard(guardSleep GuardSleepMap) (sleepiestGuard int, sleepiestMinute int) {
 	sleepiestGuard = 0
 	sleepiestGuardMinutes := 0
 
@@ -150,8 +156,8 @@ func findSleepiestGuard(guardSleep map[int]map[string][]int) (sleepiestGuard int
 	return sleepiestGuard, sleepiestMinute
 }
 
-func findSleepiestMinute(dates map[string][]int) (sleepiestMinute int, sleepiestMinuteCount int) {
-	minutesAggregate := make([]int, 60)
+func findSleepiestMinute(dates DateSleepMap) (sleepiestMinute int, sleepiestMinuteCount int) {
+	minutesAggregate := make(MinutesSlept, 60)
 
 	for _, minutes := range dates {
 		for i, minute := range minutes {
@@ -169,7 +175,7 @@ func findSleepiestMinute(dates map[string][]int) (sleepiestMinute int, sleepiest
 	return sleepiestMinute, minutesAggregate[sleepiestMinute]
 }
 
-func findSleepiestGuardByMinute(guardSleep map[int]map[string][]int) (sleepiestGuardByMinute int, sleepiestOverallMinute int) {
+func findSleepiestGuardByMinute(guardSleep GuardSleepMap) (sleepiestGuardByMinute int, sleepiestOverallMinute int) {
 	sleepiestGuardByMinute = 0
 	sleepiestOverallMinute = 0
 	sleepiestMinuteCount := 0
@@ -187,7 +193,7 @@ func findSleepiestGuardByMinute(guardSleep map[int]map[string][]int) (sleepiestG
 	return sleepiestGuardByMinute, sleepiestOverallMinute
 }
 
-func printGuardSleep(guardSleep map[int]map[string][]int) {
+func printGuardSleep(guardSleep GuardSleepMap) {
 	for guard, dates := range guardSleep {
 		fmt.Printf("Guard %d\n", guard)
 		for date, minutes := range dates {
