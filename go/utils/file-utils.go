@@ -2,10 +2,21 @@ package utils
 
 import (
 	"bufio"
+	"io/ioutil"
+	"log"
 	"os"
 	"strconv"
 	"strings"
 )
+
+func ProcessFullFile(inputFile string) string {
+	content, err := ioutil.ReadFile(inputFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return string(content)
+}
 
 func ProcessSingleStringLineFile(inputFile string) string {
 	file, err := os.Open(inputFile)
