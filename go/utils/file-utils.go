@@ -2,7 +2,6 @@ package utils
 
 import (
 	"bufio"
-	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
@@ -10,7 +9,7 @@ import (
 )
 
 func ProcessFullFile(inputFile string) string {
-	content, err := ioutil.ReadFile(inputFile)
+	content, err := os.ReadFile(inputFile)
 	if err != nil {
 		log.Fatal(err)
 	}

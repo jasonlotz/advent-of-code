@@ -1,0 +1,92 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+
+	"github.com/jasonlotz/advent-of-code/go/utils"
+)
+
+var inputFile = "../../../input-files/2022/05/input.txt"
+var testInputFile = "../../../input-files/2022/05/input-sample.txt"
+var isTestMode = false
+
+type instruction struct {
+	qty, from, to int
+}
+
+func (i instruction) String() string {
+	return fmt.Sprintf("Move %d from %d to %d", i.qty, i.from, i.to)
+}
+
+func getInput() (rawState string, rawInstructions string) {
+	file := inputFile
+
+	if isTestMode {
+		file = testInputFile
+	}
+
+	input := strings.TrimRight(utils.ProcessFullFile(file), "\n")
+	splitInput := strings.Split(input, "\n\n")
+
+	return splitInput[0], splitInput[1]
+}
+
+func main() {
+	part1()
+}
+
+func part1() {
+	rawState, rawInstructions := getInput()
+
+	state := parseInitialState(rawState)
+	instructions := parseInstructions(rawInstructions)
+
+	fmt.Println("State:", state)
+	fmt.Println("Instructions:", instructions)
+}
+
+func parseInitialState(rawState string) []utils.Stack {
+	state := rawState
+
+	formatted := [][]string{}
+	for _, row := range strings.Split(state, "\n") {
+		formatted = append(formatted, strings.Split(row, ""))
+	}
+	oRows, oCols := len(formatted), len(formatted[0])
+
+	actual := []utils.Stack{}
+	for c := 0; c < oCols-1; c++ {
+		if formatted[oRows-1][c] != " " {
+			// found a column with values, move up the column and add to the actual stack
+			stack := []string{}
+			for r := oRows - 2; r >= 0; r-- {
+				char := formatted[r][c]
+				if char != " " {
+					stack = append(stack, char)
+				}
+			}
+			actual = append(actual, stack)
+		}
+	}
+
+	return actual
+}
+
+func parseInstructions(rawInstructions string) []instruction {
+	instructions := []instruction{}
+
+	for _, row := range strings.Split(rawInstructions, "\n") {
+		inst := instruction{}
+		_, err := fmt.Sscanf(row, "move %d from %d to %d", &inst.qty, &inst.from, &inst.to)
+		if err != nil {
+			panic(err)
+		}
+		// Make the insructions 0-indexed
+		inst.from--
+		inst.to--
+		instructions = append(instructions, inst)
+	}
+
+	return instructions
+}
