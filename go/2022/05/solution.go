@@ -34,6 +34,7 @@ func getInput() (rawState string, rawInstructions string) {
 
 func main() {
 	part1()
+	part2()
 }
 
 func part1() {
@@ -42,8 +43,24 @@ func part1() {
 	state := parseInitialState(rawState)
 	instructions := parseInstructions(rawInstructions)
 
-	fmt.Println("State:", state)
-	fmt.Println("Instructions:", instructions)
+	followInstructions(&state, instructions)
+
+	result := readTopOfStacks(state)
+
+	fmt.Println("Part 1:", result)
+}
+
+func part2() {
+	rawState, rawInstructions := getInput()
+
+	state := parseInitialState(rawState)
+	instructions := parseInstructions(rawInstructions)
+
+	followUpdatedInstructions(&state, instructions)
+
+	result := readTopOfStacks(state)
+
+	fmt.Println("Part 2:", result)
 }
 
 func parseInitialState(rawState string) []utils.Stack {
@@ -58,7 +75,7 @@ func parseInitialState(rawState string) []utils.Stack {
 	actual := []utils.Stack{}
 	for c := 0; c < oCols-1; c++ {
 		if formatted[oRows-1][c] != " " {
-			// found a column with values, move up the column and add to the actual stack
+			// Found a column with values, move up the column and add to the actual stack
 			stack := []string{}
 			for r := oRows - 2; r >= 0; r-- {
 				char := formatted[r][c]
@@ -82,11 +99,49 @@ func parseInstructions(rawInstructions string) []instruction {
 		if err != nil {
 			panic(err)
 		}
-		// Make the insructions 0-indexed
+		// Make the instructions 0-indexed
 		inst.from--
 		inst.to--
 		instructions = append(instructions, inst)
 	}
 
 	return instructions
+}
+
+func followInstructions(state *[]utils.Stack, instructions []instruction) {
+	for _, inst := range instructions {
+		for i := 0; i < inst.qty; i++ {
+			val, ok := (*state)[inst.from].Pop()
+			if !ok {
+				panic("No value to move")
+			}
+
+			(*state)[inst.to].Push(val)
+		}
+	}
+}
+
+func followUpdatedInstructions(state *[]utils.Stack, instructions []instruction) {
+	for _, inst := range instructions {
+		vals, ok := (*state)[inst.from].PopMultiple(inst.qty)
+		if !ok {
+			panic("No value to move")
+		}
+
+		for _, val := range vals {
+			(*state)[inst.to].Push(val)
+		}
+	}
+}
+
+func readTopOfStacks(state []utils.Stack) string {
+	result := ""
+	for _, stack := range state {
+		val, ok := stack.Peek()
+		if !ok {
+			panic("No value to read from stack")
+		}
+		result += val
+	}
+	return result
 }
