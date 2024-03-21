@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"io"
+	"strings"
 )
 
 var input = "ugkcyxxp"
@@ -53,7 +54,7 @@ func generatePassword(prefix string) string {
 
 func generatePassword2(prefix string) string {
 	password := "________"
-	for i := 0; passwordContainsUnderscores(password); i++ {
+	for i := 0; strings.Contains(password, "_"); i++ {
 		hash := generateMd5(prefix + fmt.Sprint(i))
 		if hash[:5] == "00000" {
 			position := int(hash[5]) - 48 // convert ascii to int
@@ -64,13 +65,4 @@ func generatePassword2(prefix string) string {
 		}
 	}
 	return password
-}
-
-func passwordContainsUnderscores(password string) bool {
-	for _, c := range password {
-		if c == '_' {
-			return true
-		}
-	}
-	return false
 }
