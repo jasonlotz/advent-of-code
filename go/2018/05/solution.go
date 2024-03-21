@@ -40,7 +40,7 @@ func part2() {
 	input := getInput()
 
 	shortestPolymer := len(input)
-	for i := 65; i <= 90; i++ {
+	for i := int('A'); i <= int('Z'); i++ {
 		letterToReplace := fmt.Sprintf("%c", i)
 		reactedPolymer := reactPolymer(strings.Replace(input, letterToReplace, "", -1))
 		reactedPolymer = reactPolymer(strings.Replace(reactedPolymer, strings.ToLower(letterToReplace), "", -1))
