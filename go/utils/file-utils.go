@@ -22,6 +22,8 @@ func ProcessSingleStringLineFile(inputFile string) string {
 	if err != nil {
 		panic(err)
 	}
+	defer file.Close()
+
 	scanner := bufio.NewScanner(file)
 	scanner.Scan()
 	return scanner.Text()
@@ -32,6 +34,8 @@ func ProcessStringLinesFile(inputFile string) []string {
 	if err != nil {
 		panic(err)
 	}
+	defer file.Close()
+
 	scanner := bufio.NewScanner(file)
 	processedFile := make([]string, 0)
 
@@ -68,6 +72,8 @@ func ProcessIntsLinesFile(inputFile string) [][]int {
 	if err != nil {
 		panic(err)
 	}
+	defer file.Close()
+
 	scanner := bufio.NewScanner(file)
 	processedFile := make([][]int, 0)
 
