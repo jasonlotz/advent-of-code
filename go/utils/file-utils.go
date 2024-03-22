@@ -8,6 +8,15 @@ import (
 	"strings"
 )
 
+func openFile(inputFile string) *os.File {
+	file, err := os.Open(inputFile)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	return file
+}
+
 func ProcessFullFile(inputFile string) string {
 	content, err := os.ReadFile(inputFile)
 	if err != nil {
@@ -18,11 +27,7 @@ func ProcessFullFile(inputFile string) string {
 }
 
 func ProcessSingleStringLineFile(inputFile string) string {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+	file := openFile(inputFile)
 
 	scanner := bufio.NewScanner(file)
 	scanner.Scan()
@@ -30,11 +35,7 @@ func ProcessSingleStringLineFile(inputFile string) string {
 }
 
 func ProcessStringLinesFile(inputFile string) []string {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+	file := openFile(inputFile)
 
 	scanner := bufio.NewScanner(file)
 	processedFile := make([]string, 0)
@@ -47,11 +48,7 @@ func ProcessStringLinesFile(inputFile string) []string {
 }
 
 func ProcessIntLinesFile(inputFile string) []int {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+	file := openFile(inputFile)
 
 	scanner := bufio.NewScanner(file)
 	processedFile := make([]int, 0)
@@ -68,11 +65,7 @@ func ProcessIntLinesFile(inputFile string) []int {
 	return processedFile
 }
 func ProcessIntsLinesFile(inputFile string) [][]int {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+	file := openFile(inputFile)
 
 	scanner := bufio.NewScanner(file)
 	processedFile := make([][]int, 0)
