@@ -60,8 +60,8 @@ func findMissingSeat(seats []int) int {
 	sort.Ints(seats)
 
 	for i := 1; i < len(seats); i++ {
-		// If the seat is not consecutive and the seat before it is 2 less than it, then the missing seat is in between
-		if seats[i] != seats[i-1]+1 && seats[i]-2 == seats[i-1] {
+		// If the seat before is exactly 2 less, then the missing seat is in between
+		if seats[i] == seats[i-1]+2 {
 			return seats[i] - 1
 		}
 	}
