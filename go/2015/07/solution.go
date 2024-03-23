@@ -103,14 +103,11 @@ func parseInstructions(input []string) WireMap {
 			wireLabel = words[2]
 		}
 
-		var wire Wire
 		if _, ok := wireMap[wireLabel]; !ok {
-			wire = Wire{value: 0, evaluated: false}
-			wire.instructions = []Instruction{}
-			wireMap[wireLabel] = &wire
+			wireMap[wireLabel] = &Wire{}
 		}
 
-		wire = *wireMap[wireLabel]
+		wire := *wireMap[wireLabel]
 		wire.instructions = append(wire.instructions, instruction)
 		wireMap[wireLabel] = &wire
 	}
