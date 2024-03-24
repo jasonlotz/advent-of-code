@@ -131,10 +131,10 @@ func (w *Wire) signalValue(wireMap *WireMap) {
 	}
 
 	for _, inst := range w.instructions {
-		(*w).value = processInstruction(inst, wireMap)
+		w.value = processInstruction(inst, wireMap)
 	}
 
-	(*w).evaluated = true
+	w.evaluated = true
 }
 
 func processInstruction(inst Instruction, wireMap *WireMap) uint16 {
