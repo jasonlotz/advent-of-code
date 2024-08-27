@@ -3,14 +3,15 @@ package main
 import (
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 	"strings"
 
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var inputFile = "../../../input-files/2021/09/input.txt"
-var testInputFile = "../../../input-files/2021/09/input-sample.txt"
+var inputFile = "../../../input-files/2021/05/input.txt"
+var testInputFile = "../../../input-files/2021/05/input-sample.txt"
 var isTestMode = false
 
 type Point struct {
@@ -214,11 +215,16 @@ func bresenhamLine(line Line) []Point {
 	x2 := line.end.x
 	y2 := line.end.y
 
-	dx := utils.Abs(x2 - x1)
-	dy := utils.Abs(y2 - y1)
+	dx := int(math.Abs(float64(x2 - x1)))
+	dy := int(math.Abs(float64(y2 - y1)))
 
-	sx := utils.Sign(x2 - x1)
-	sy := utils.Sign(y2 - y1)
+	sx, sy := 1, 1
+	if math.Signbit(float64(x2 - x1)) {
+		sx = -1
+	}
+	if math.Signbit(float64(y2 - y1)) {
+		sy = -1
+	}
 
 	var err float64
 	if dx > dy {
