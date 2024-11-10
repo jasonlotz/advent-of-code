@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/jasonlotz/advent-of-code/go/utils"
+	"math"
 )
 
 type DirectionType string
@@ -23,7 +22,7 @@ var Direction = struct {
 func main() {
 	input := 23
 	x, y := getCoordForSpiralGrid(input)
-	distance := utils.Abs(x) + utils.Abs(y)
+	distance := int(math.Abs(float64(x)) + math.Abs(float64(y)))
 	fmt.Printf("%d  -> %d, %d (%d)\n", input, x, y, distance)
 }
 

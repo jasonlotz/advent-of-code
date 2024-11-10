@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 
@@ -90,7 +91,7 @@ func findMinDistance(locations1 map[[2]int]int, locations2 map[[2]int]int) int {
 	intersections := findIntersections(locations1, locations2)
 
 	for loc := range intersections {
-		distance := utils.Abs(loc[0]) + utils.Abs(loc[1])
+		distance := int(math.Abs(float64(loc[0])) + math.Abs(float64(loc[1])))
 		if minDistance == -1 || distance < minDistance {
 			minDistance = distance
 		}
