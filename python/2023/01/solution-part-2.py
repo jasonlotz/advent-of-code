@@ -13,25 +13,27 @@ number_map = {
     "nine": 9
 }
 
-with open(INPUT_PATH, "r") as input_file:
-    total = 0
 
-    for line in input_file:
-        numbers = []
-
-        for i in range(len(line)):
-            if line[i].isnumeric():
-                numbers.append(line[i])
-                continue
-
-            for key in number_map.keys():
+def extract_numbers(line):
+    numbers = []
+    i = 0
+    while i < len(line):
+        if line[i].isnumeric():
+            numbers.append(int(line[i]))
+            i += 1
+        else:
+            for key, value in number_map.items():
                 if line[i:i + len(key)] == key:
-                    numbers.append(number_map[key])
-                    continue
+                    numbers.append(value)
+                    i += len(key)
+                    break
+            else:
+                i += 1
+    return numbers
 
-        line_total = (int(numbers[0]) * 10) + int(numbers[-1])
-        print(line, numbers, line_total)
-        total += line_total
 
+with open(INPUT_PATH, "r") as input_file:
+    total = sum((int(numbers[0]) * 10) + int(numbers[-1])
+                for line in input_file if (numbers := extract_numbers(line)))
 
 print(f"Total: {total}")

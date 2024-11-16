@@ -4,21 +4,10 @@ with open(INPUT_PATH, "r") as input_file:
     total = 0
 
     for line in input_file:
-        first = 0
-        last = 0
-
-        # first digit
-        for c in line[::1]:
-            if c.isnumeric():
-                first = c
-                break
-
-        # last digit
-        for c in line[::-1]:
-            if c.isnumeric():
-                last = c
-                break
-
-        total += (int(first) * 10) + int(last)
+        digits = [c for c in line if c.isnumeric()]
+        if digits:
+            first = digits[0]
+            last = digits[-1]
+            total += (int(first) * 10) + int(last)
 
 print(f"Total: {total}")
