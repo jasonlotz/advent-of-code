@@ -14,7 +14,8 @@ def find_mirror(square):
         above = square[:r][::-1]
         below = square[r:]
 
-        # Trick for making the array length the same equivalent to the shorter array
+        # Trick for making the array length the
+        # same equivalent to the shorter array
         above = above[:len(below)]
         below = below[:len(above)]
 
@@ -29,7 +30,8 @@ def find_smudge(square):
         above = square[:r][::-1]
         below = square[r:]
 
-        if sum(sum(0 if a == b else 1 for a, b in zip(x, y)) for x, y in zip(above, below)) == 1:
+        if sum(sum(0 if a == b else 1 for a, b in zip(x, y))
+               for x, y in zip(above, below)) == 1:
             return r
 
     return 0

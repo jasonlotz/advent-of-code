@@ -24,7 +24,8 @@ for current_node in nodes:
     while True:
         while steps == 0 or not current_node.endswith("Z"):
             steps += 1
-            current_node = network[current_node][0 if current_steps[0] == "L" else 1]
+            current_node = (network[current_node]
+                            [0 if current_steps[0] == "L" else 1])
             current_steps = current_steps[1:] + current_steps[0]
 
         cycle.append(steps)

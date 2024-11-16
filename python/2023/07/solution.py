@@ -35,7 +35,7 @@ def calc_hand_counter_value(hand_counter):
     return hand_value
 
 
-def calc_high_card_score(hand, jokers=False):
+def calc_high_card_score(hand, jokers=False) -> int:
     card_values = CARD_VALUES.copy()
     if jokers:
         card_values["J"] = 1
@@ -45,10 +45,10 @@ def calc_high_card_score(hand, jokers=False):
     for card in hand:
         high_card_score += card_values[card] * multiplier
         multiplier /= 100
-    return high_card_score
+    return int(high_card_score)
 
 
-def hand_value(hand: str) -> int:
+def hand_value(hand: str) -> tuple[int, int]:
     hand_counter = Counter(hand)
     hand_value = calc_hand_counter_value(hand_counter)
 
@@ -57,7 +57,7 @@ def hand_value(hand: str) -> int:
     return hand_value, high_card_score
 
 
-def hand_value_with_jokers(hand: str) -> int:
+def hand_value_with_jokers(hand: str) -> tuple[str, int, int]:
     hand_counter = Counter(hand)
     hand_value = calc_hand_counter_value(hand_counter)
     high_card_score = calc_high_card_score(hand, True)
@@ -102,7 +102,8 @@ def main():
         new_hand, value_with_jokers, high_card_score_with_jokers = hand_value_with_jokers(
             hand)
         hands_with_jokers.append(
-            (hand, new_hand, value_with_jokers, high_card_score_with_jokers, int(bid)))
+            (hand, new_hand, value_with_jokers,
+             high_card_score_with_jokers, int(bid)))
         hands_with_jokers.sort(key=lambda x: (x[2], x[3]))
 
     print("Scored Hand (No Jokers)")

@@ -53,7 +53,7 @@ with open(INPUT_PATH, "r") as input_file:
     for line in input_file:
         game = Game()
         game.parse(line)
-        if game.validate(12, 13, 14):
+        if game.validate(12, 13, 14) and game.id:
             total_valid += 1
             sum_valid_ids += game.id
         else:

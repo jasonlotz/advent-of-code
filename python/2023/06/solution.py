@@ -19,7 +19,6 @@ def calc_winning_hold_times(time, record_distance) -> int:
             winning_button_hold_times += 1
         else:
             if won_last_trial:
-                # print("Lost! You definitely won't win by holding the button longer!")
                 break
 
     return winning_button_hold_times
