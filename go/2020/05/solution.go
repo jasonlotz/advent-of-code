@@ -8,14 +8,14 @@ import (
 )
 
 var inputFile = "../../../input-files/2020/05/input.txt"
-var testInputFile = "../../../input-files/2020/05/input-sample.txt"
-var isTestMode = false
+var testSampleFile = "../../../input-files/2020/05/input-sample.txt"
+var isSampleMode = false
 
 func getInput() []string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = testSampleFile
 	}
 
 	return utils.ProcessStringLinesFile(file)

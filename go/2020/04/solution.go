@@ -10,16 +10,16 @@ import (
 )
 
 var inputFile = "../../../input-files/2020/04/input.txt"
-var testInputFile = "../../../input-files/2020/04/input-sample.txt"
-var isTestMode = false
+var testSampleFile = "../../../input-files/2020/04/input-sample.txt"
+var isSampleMode = false
 
 type Passport map[string]string
 
 func getInput() string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = testSampleFile
 	}
 
 	return utils.ProcessFullFile(file)

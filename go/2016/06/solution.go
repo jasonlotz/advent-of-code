@@ -8,8 +8,8 @@ import (
 )
 
 var inputFile = "../../../input-files/2016/06/input.txt"
-var testInputFile = "../../../input-files/2016/06/input-sample.txt"
-var isTestMode = false
+var sampleInputFile = "../../../input-files/2016/06/input-sample.txt"
+var isSampleMode = false
 
 type LetterPositions []LetterMap
 type LetterMap map[string]int
@@ -17,8 +17,8 @@ type LetterMap map[string]int
 func getInput() []string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	return utils.ProcessStringLinesFile(file)

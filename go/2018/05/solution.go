@@ -8,14 +8,14 @@ import (
 )
 
 var inputFile = "../../../input-files/2018/05/input.txt"
-var testInputFile = "../../../input-files/2018/05/input-sample.txt"
-var isTestMode = true
+var sampleInputFile = "../../../input-files/2018/05/input-sample.txt"
+var isSampleMode = true
 
 func getInput() string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	return utils.ProcessSingleStringLineFile(file)
@@ -30,7 +30,7 @@ func part1() {
 	input := getInput()
 
 	reactedPolymer := reactPolymer(input)
-	if isTestMode {
+	if isSampleMode {
 		fmt.Println("Final polymer:", reactedPolymer)
 	}
 	fmt.Println("Part 1:", len(reactedPolymer))
@@ -52,7 +52,7 @@ func part2() {
 			shortestPolymer = len(reactedPolymer)
 		}
 
-		if isTestMode {
+		if isSampleMode {
 			fmt.Println("Final polymer:", reactedPolymer)
 		}
 	}

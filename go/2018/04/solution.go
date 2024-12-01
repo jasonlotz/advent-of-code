@@ -8,8 +8,8 @@ import (
 )
 
 var inputFile = "../../../input-files/2018/04/input.txt"
-var testInputFile = "../../../input-files/2018/04/input-sample.txt"
-var isTestMode = false
+var sampleInputFile = "../../../input-files/2018/04/input-sample.txt"
+var isSampleMode = false
 
 type Action struct {
 	Year    int
@@ -38,8 +38,8 @@ type MinutesSlept []int
 func getInput() []string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	lines := utils.ProcessStringLinesFile(file)
@@ -54,7 +54,7 @@ func main() {
 	actions := parseInput(input)
 
 	guardSleep := processActions(actions)
-	if isTestMode {
+	if isSampleMode {
 		printGuardSleep(guardSleep)
 	}
 

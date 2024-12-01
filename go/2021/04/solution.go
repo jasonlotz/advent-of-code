@@ -10,16 +10,16 @@ import (
 )
 
 var inputFile = "../../../input-files/2021/04/input.txt"
-var testInputFile = "../../../input-files/2021/04/input-sample.txt"
-var isTestMode = false
+var sampleInputFile = "../../../input-files/2021/04/input-sample.txt"
+var isSampleMode = false
 
 type Board [][]int
 
 func getInput() (picks []int, boards []Board) {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	splitInput := strings.Split(strings.TrimSpace(utils.ProcessFullFile(file)), "\n\n")

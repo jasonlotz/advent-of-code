@@ -7,14 +7,14 @@ import (
 )
 
 var inputFile = "../../../input-files/2016/07/input.txt"
-var testInputFile = "../../../input-files/2016/07/input-sample.txt"
-var isTestMode = false
+var sampleInputFile = "../../../input-files/2016/07/input-sample.txt"
+var isSampleMode = false
 
 func getInput() []string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	return utils.ProcessStringLinesFile(file)

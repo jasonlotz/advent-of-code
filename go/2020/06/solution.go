@@ -8,14 +8,14 @@ import (
 )
 
 var inputFile = "../../../input-files/2020/06/input.txt"
-var testInputFile = "../../../input-files/2020/06/input-sample.txt"
-var isTestMode = false
+var sampleInputFile = "../../../input-files/2020/06/input-sample.txt"
+var isSampleMode = false
 
 func getInput() [][]string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	input := strings.TrimSpace(utils.ProcessFullFile(file))

@@ -9,8 +9,8 @@ import (
 )
 
 var inputFile = "../../../input-files/2015/09/input.txt"
-var testInputFile = "../../../input-files/2015/09/input-sample.txt"
-var isTestMode = false
+var sampleInputFile = "../../../input-files/2015/09/input-sample.txt"
+var isSampleMode = false
 
 type path struct {
 	From     string
@@ -21,12 +21,12 @@ type path struct {
 type mapGraph map[string]map[string]int
 
 func getInput() []string {
-	flag.BoolVar(&isTestMode, "test", false, "Use the test input")
+	flag.BoolVar(&isSampleMode, "sample", false, "Use the sample input")
 	flag.Parse()
 
 	file := inputFile
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	return utils.ProcessStringLinesFile(file)

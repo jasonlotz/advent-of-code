@@ -11,8 +11,8 @@ import (
 )
 
 var inputFile = "../../../input-files/2021/05/input.txt"
-var testInputFile = "../../../input-files/2021/05/input-sample.txt"
-var isTestMode = false
+var testSampleFile = "../../../input-files/2021/05/input-sample.txt"
+var isSampleMode = false
 
 type Point struct {
 	x int
@@ -27,8 +27,8 @@ type Line struct {
 func getInput() []string {
 	file := inputFile
 
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = testSampleFile
 	}
 
 	return utils.ProcessStringLinesFile(file)
@@ -56,7 +56,7 @@ func part1() {
 
 	grid := processLines(straightLines)
 
-	if isTestMode {
+	if isSampleMode {
 		printGrid(grid)
 	}
 
@@ -82,7 +82,7 @@ func part2() {
 
 	grid := processLines(straightOrDiagLines)
 
-	if isTestMode {
+	if isSampleMode {
 		printGrid(grid)
 	}
 
@@ -141,7 +141,7 @@ func isDiagonal(line *Line) bool {
 func processLines(lines []Line) [][]int {
 	size := 1000
 
-	if isTestMode {
+	if isSampleMode {
 		size = 10
 	}
 

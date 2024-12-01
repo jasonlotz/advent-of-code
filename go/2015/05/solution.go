@@ -9,16 +9,16 @@ import (
 )
 
 var inputFile = "../../../input-files/2015/05/input.txt"
-var testInputFile = "../../../input-files/2015/05/input-sample.txt"
-var testMode = false
+var sampleInputFile = "../../../input-files/2015/05/input-sample.txt"
+var isSampleMode = false
 
 func main() {
-	flag.BoolVar(&testMode, "test", false, "Use the test input")
+	flag.BoolVar(&isSampleMode, "sample", false, "Use the sample input")
 	flag.Parse()
 
 	file := inputFile
-	if testMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	input := utils.ProcessStringLinesFile(file)
