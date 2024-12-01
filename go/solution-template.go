@@ -7,17 +7,17 @@ import (
 	"github.com/jasonlotz/advent-of-code/go/utils"
 )
 
-var inputFile = "../../../input-files/YEAR/DAY/input.txt"
-var testInputFile = "../../../input-files/YEAR/DAY/input-sample.txt"
-var isTestMode = false
+var inputFile = "../../../input-files/yyyy/dd/input.txt"
+var sampleInputFile = "../../../input-files/yyyy/dd/input-sample.txt"
+var isSampleMode = false
 
 func getInput() []string {
-	flag.BoolVar(&isTestMode, "test", false, "Use the test input")
+	flag.BoolVar(&isSampleMode, "sample", false, "Use the sample input")
 	flag.Parse()
 
 	file := inputFile
-	if isTestMode {
-		file = testInputFile
+	if isSampleMode {
+		file = sampleInputFile
 	}
 
 	return utils.ProcessStringLinesFile(file)
