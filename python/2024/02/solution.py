@@ -24,16 +24,25 @@ def parse_input(input: List[str]) -> list[list[int]]:
 
 
 def test_for_safety(report: List[int]) -> bool:
+    increasing = None  # None means we haven't determined the trend yet
+
     for i in range(1, len(report)):
-        # Unsafe if the difference between two numbers is greater than 3
-        # or less than 1
-        if abs(report[i] - report[i - 1]) > 3 or  abs(report[i] - report[i - 1]) < 1:
+        diff = report[i] - report[i - 1]
+
+        if abs(diff) > 3 or abs(diff) < 1:
             return False
 
-        # Unsafe if the report is not in increasing or decreasing order
-        if (report[i] > report[i - 1] and any(report[j] < report[j - 1] for j in range(1, i))) or \
-           (report[i] < report[i - 1] and any(report[j] > report[j - 1] for j in range(1, i))):
+        # Determine the trend if not already determined
+        if increasing is None:
+            if diff > 0:
+                increasing = True
+            elif diff < 0:
+                increasing = False
+
+        # Check if the trend is violated
+        if (increasing and diff < 0) or (not increasing and diff > 0):
             return False
+
     return True
 
 
