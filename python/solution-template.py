@@ -4,11 +4,11 @@ from typing import List
 INPUT_PATH = "input-files/yyyy/dd/input.txt"
 SAMPLE_INPUT_PATH = "input-files/yyyy/dd/input-sample.txt"
 
-isSampleMode = False
+is_sample_mode = False
 
 
 def read_input() -> List[str]:
-    if isSampleMode:
+    if is_sample_mode:
         file_path = SAMPLE_INPUT_PATH
     else:
         file_path = INPUT_PATH
@@ -17,16 +17,17 @@ def read_input() -> List[str]:
         return input_file.readlines()
 
 
-def parse_input(input: List[str]) -> None:
-    for line in input:
-        print(line)
-    pass
+def parse_input(input: List[str]) -> List[List[str]]:
+    split_lines = [line.split() for line in input]
+
+    return split_lines
 
 
 def part1():
     input = read_input()
-    parse_input(input)
-    pass
+    split_input = parse_input(input)
+
+    print(split_input)
 
 
 def part2():
@@ -40,8 +41,8 @@ def main():
     args = parser.parse_args()
 
     if args.sample:
-        global isSampleMode
-        isSampleMode = True
+        global is_sample_mode
+        is_sample_mode = True
 
     part1()
     part2()

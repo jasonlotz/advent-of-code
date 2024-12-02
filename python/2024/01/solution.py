@@ -5,11 +5,11 @@ from typing import List, Tuple
 INPUT_PATH = "input-files/2024/01/input.txt"
 SAMPLE_INPUT_PATH = "input-files/2024/01/input-sample.txt"
 
-isSampleMode = False
+is_sample_mode = False
 
 
 def read_input() -> List[str]:
-    if isSampleMode:
+    if is_sample_mode:
         file_path = SAMPLE_INPUT_PATH
     else:
         file_path = INPUT_PATH
@@ -56,8 +56,8 @@ def main():
     args = parser.parse_args()
 
     if args.sample:
-        global isSampleMode
-        isSampleMode = True
+        global is_sample_mode
+        is_sample_mode = True
 
     sum_total_distance()
     calc_similarity_score()
