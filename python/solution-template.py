@@ -24,10 +24,9 @@ def parse_input(input: List[str]) -> List[List[str]]:
 
 
 def part1():
-    input = read_input()
-    split_input = parse_input(input)
+    input = parse_input(read_input())
 
-    print(split_input)
+    print(input)
 
 
 def part2():
