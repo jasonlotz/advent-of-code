@@ -24,17 +24,7 @@ def parse_input(input: List[str]) -> List[str]:
 
 
 def turn_right(current_direction: Tuple[int, int]) -> Tuple[int, int]:
-    # Use rotation matrix to turn right
-    if current_direction == (0, -1):
-        return (1, 0)
-    elif current_direction == (1, 0):
-        return (0, 1)
-    elif current_direction == (0, 1):
-        return (-1, 0)
-    elif current_direction == (-1, 0):
-        return (0, -1)
-
-    raise ValueError("Invalid direction")
+    return (-current_direction[1], current_direction[0])
 
 
 def find_starting_point(input: List[str]) -> Tuple[int, int]:
