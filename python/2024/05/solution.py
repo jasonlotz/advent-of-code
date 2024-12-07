@@ -1,84 +1,61 @@
 import argparse
-from typing import List, Tuple
+from typing import List
 
 INPUT_PATH = "input-files/2024/05/input.txt"
 SAMPLE_INPUT_PATH = "input-files/2024/05/input-sample.txt"
 
 is_sample_mode = False
 
-
-class PuzzleInput:
-    def __init__(self):
-        self.rules: List[Tuple[int, int]] = []
-        self.updates: List[List[int]] = []
-
-    def add_rule(self, rule: Tuple[int, int]):
-        self.rules.append(rule)
-
-    def add_update(self, update: List[int]):
-        self.updates.append(update)
-
-    def __str__(self):
-        return f"Rules:\n{self.rules}\nUpdates:\n{self.updates}"
+rules = {}
+updates = []
 
 
-def read_input() -> str:
+def read_input() -> List[str]:
     if is_sample_mode:
         file_path = SAMPLE_INPUT_PATH
     else:
         file_path = INPUT_PATH
 
     with open(file_path, "r") as input_file:
-        return input_file.read()
+        return input_file.readlines()
 
 
-def parse_input(input: str) -> PuzzleInput:
-    rules, updates = input.split("\n\n")
-
-    puzzle_input = PuzzleInput()
-
-    for rule in rules.split("\n"):
-        rule_parts = rule.split("|")
-        puzzle_input.add_rule((int(rule_parts[0]), int(rule_parts[1])))
-
-    for update in updates.strip().split("\n"):
-        puzzle_input.add_update([int(num) for num in update.split(",")])
-
-    return puzzle_input
-
-
-def part1():
-    puzzle_input = parse_input(read_input())
-
-    middle_page_total = 0
-
-    for update in puzzle_input.updates:
-        is_valid = True
-
-        for rule in puzzle_input.rules:
-            try:
-                position_before = update.index(rule[0])
-                position_after = update.index(rule[1])
-            except ValueError:
-                continue
-
-            if position_before > position_after:
-                is_valid = False
-                break
-
-        if is_valid:
-            middle_page_total += update[len(update) // 2]
-
-    print(f"Middle page total: {middle_page_total}")
+def parse_input(input: List[str]) -> None:
+    for line in input:
+        if "|" in line:
+            # Rule
+            a, b = line.strip().split("|")
+            if a not in rules:
+                rules[a] = []
+            rules[a].append(b)
+        else:
+            # Update
+            if line.strip():
+                updates.append(line.strip().split(","))
 
 
-def part2():
-    puzzle_input = parse(read_input())
+def correct_order(update: list, fix_wrong=False) -> int:
+    # For each update, check all of the following updates to see
+    # if they are in the correct order
+    for i in range(len(update)):
+        for j in range(i + 1, len(update)):
+            # Get the rule for the second value
+            rule = rules.get(update[j], [])
 
-    middle_page_total = 0
+            # If the first value is in the rule, then they are in the
+            # wrong order
+            if update[i] in rule:
+                if fix_wrong:
+                    # For part 2, if they are not in the correct order,
+                    # swap them and check again
+                    update[i], update[j] = update[j], update[i]
+                    return correct_order(update, True)
+                else:
+                    # For part 1, if they are not in the correct order,
+                    # return 0 as they are not counted
+                    return 0
 
-    for update in puzzle_input.updates:
-        reordered_update =
+    return int(update[len(update) // 2])
 
 
 def main():
@@ -91,8 +68,17 @@ def main():
         global is_sample_mode
         is_sample_mode = True
 
-    part1()
-    part2()
+    part_1_result = 0
+    part_2_result = 0
+
+    parse_input(read_input())
+
+    for update in updates:
+        part_1_result += correct_order(update)
+        part_2_result += correct_order(update, True)
+
+    print("Part 1:", part_1_result)
+    print("Part 2:", part_2_result - part_1_result)
 
 
 if __name__ == "__main__":
