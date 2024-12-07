@@ -73,7 +73,12 @@ def part1():
 
 
 def part2():
-    pass
+    puzzle_input = parse(read_input())
+
+    middle_page_total = 0
+
+    for update in puzzle_input.updates:
+        reordered_update =
 
 
 def main():

@@ -61,10 +61,6 @@ def part2():
     total_calibration_result = 0
 
     for test_value, numbers in input:
-        print("----")
-        print(f"Test value: {test_value}")
-        print(f"Numbers: {numbers}")
-
         operations = ["*", "+", "||"]
 
         op_combos = itertools.product(operations, repeat=len(numbers) - 1)
@@ -81,7 +77,6 @@ def part2():
                     result = int(str(result) + str(numbers[i + 1]))
 
             if result == test_value:
-                print(f"Found result: {result}")
                 total_calibration_result += test_value
                 break
 
