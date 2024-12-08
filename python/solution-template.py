@@ -7,26 +7,23 @@ SAMPLE_INPUT_PATH = "input-files/yyyy/dd/input-sample.txt"
 is_sample_mode = False
 
 
-def read_input() -> List[str]:
+def parse_input() -> List[List[str]]:
     if is_sample_mode:
         file_path = SAMPLE_INPUT_PATH
     else:
         file_path = INPUT_PATH
 
+    split_lines = []
     with open(file_path, "r") as input_file:
-        return input_file.readlines()
-
-
-def parse_input(input: List[str]) -> List[List[str]]:
-    split_lines = [line.split() for line in input]
+        split_lines.append(input_file.readlines())
 
     return split_lines
 
 
 def part1():
-    input = parse_input(read_input())
+    data = parse_input()
 
-    print(input)
+    print(data)
 
 
 def part2():
