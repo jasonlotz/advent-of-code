@@ -13,11 +13,11 @@ def parse_input() -> List[List[str]]:
     else:
         file_path = INPUT_PATH
 
-    split_lines = []
+    grid = []
     with open(file_path, "r") as input_file:
-        split_lines.append(input_file.readlines())
+        grid = [list(line.strip()) for line in input_file.readlines()]
 
-    return split_lines
+    return grid
 
 
 def part1():
