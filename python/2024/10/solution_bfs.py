@@ -55,27 +55,50 @@ def bfs(grid, start_col, start_row):
     return paths
 
 
+# Note: it would be easy to combine this with the previous function, but I
+# wanted to keep the two separate for examples of how to use BFS in different
+# ways.  The main difference here is that we keep track of the path as we go
+# and we do not use a visited set to keep track of visited nodes which allows
+# us to find all unique paths.
+def bfs_all_unique(grid, start_col, start_row):
+    rows, cols = len(grid), len(grid[0])
+    # (col, row, target, path)
+    queue = deque([(start_col, start_row, 0, [(start_col, start_row)])])
+    unique_paths = []
+
+    while queue:
+        col, row, target, path = queue.popleft()
+
+        if grid[col][row] == 9:
+            unique_paths.append(path)
+            continue
+
+        # Add all possible directions to the queue
+        # where the next cell is within the grid and
+        # the target is the next number
+        for d_col, d_row in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            n_col, n_row = col + d_col, row + d_row
+            if (0 <= n_col < rows and 0 <= n_row < cols
+                    and grid[n_col][n_row] == target + 1):
+                queue.append((n_col, n_row, target + 1,
+                             path + [(n_col, n_row)]))
+
+    return len(unique_paths)
+
+
 def count_paths_bfs(grid):
     total_paths = 0
+    total_unique_paths = 0
     for col in range(len(grid)):
         for row in range(len(grid[0])):
             if grid[col][row] == 0:
                 paths = bfs(grid, col, row)
-                print(f"Paths for grid[{col}][{row}]: {paths}")
+                unique_paths = bfs_all_unique(grid, col, row)
                 total_paths += paths
-    return total_paths
+                total_unique_paths += unique_paths
 
-
-def part1():
-    data = parse_input()
-
-    total_paths = count_paths_bfs(data)
-
-    print(f"Total paths (part 1): {total_paths}")
-
-
-def part2():
-    pass
+    print(f"Total paths: {total_paths}")
+    print(f"Total unique paths: {total_unique_paths}")
 
 
 def main():
@@ -88,8 +111,9 @@ def main():
         global is_sample_mode
         is_sample_mode = True
 
-    part1()
-    part2()
+    data = parse_input()
+
+    count_paths_bfs(data)
 
 
 if __name__ == "__main__":
