@@ -20,8 +20,6 @@ def parse_input() -> List[List[int]]:
         grid = [[int(char) for char in line.strip()]
                 for line in input_file.readlines()]
 
-    print(grid)
-
     return grid
 
 
@@ -43,9 +41,8 @@ def bfs(grid, start_col, start_row):
             paths += 1
             continue
 
-        # Add all possible directions to the queue
-        # where the next cell is within the grid and
-        # the target is the next number
+        # Add all possible directions to the queue where the next cell is within the
+        # grid and the target is the next number to testasdfasdfasfasdf
         for d_col, d_row in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             n_col, n_row = col + d_col, row + d_row
             if (0 <= n_col < rows and 0 <= n_row < cols
