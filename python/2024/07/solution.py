@@ -85,8 +85,7 @@ def part2():
 
 def main():
     parser = argparse.ArgumentParser(description="Sample mode?")
-    parser.add_argument("--sample", action="store_true",
-                        help="Use the sample input")
+    parser.add_argument("--sample", action="store_true", help="Use the sample input")
     args = parser.parse_args()
 
     if args.sample:

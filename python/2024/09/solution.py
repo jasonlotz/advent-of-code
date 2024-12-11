@@ -27,7 +27,7 @@ def create_disk_map(data: List[int]) -> List[int]:
     for i, value in enumerate(data):
         if i % 2 == 0:
             for _ in range(value):
-                disk_map[pointer] = i//2
+                disk_map[pointer] = i // 2
                 pointer += 1
         else:
             for _ in range(value):
@@ -55,7 +55,7 @@ def part1():
 
     compact_disk_map_by_block(disk_map)
 
-    checksum = (sum(i * x for i, x in enumerate(disk_map) if x != -1))
+    checksum = sum(i * x for i, x in enumerate(disk_map) if x != -1)
 
     print(f"Checksum (part 1): {checksum}")
 
@@ -116,8 +116,7 @@ def part2():
 
 def main():
     parser = argparse.ArgumentParser(description="Sample mode?")
-    parser.add_argument("--sample", action="store_true",
-                        help="Use the sample input")
+    parser.add_argument("--sample", action="store_true", help="Use the sample input")
     args = parser.parse_args()
 
     if args.sample:
